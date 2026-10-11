@@ -18,9 +18,9 @@ console.log('\nChecking UUID mask placeholder in index.html:');
 console.log('  Placeholder ________-____-____-____-____________:', hasPlaceholder ? '✓ CONFIRMED' : '✗ MISSING');
 if (!hasPlaceholder) process.exit(1);
 
-// 3. Verify single line heading
-const hasHeading = html.includes('<h1 class="search-heading">Validador de autenticidade de documento</h1>');
-console.log('  Single-line heading "Validador de autenticidade de documento":', hasHeading ? '✓ CONFIRMED' : '✗ MISSING');
+// 3. Verify mobile heading
+const hasHeading = html.includes('Validador de autenticidade') && html.includes('de documento');
+console.log('  Heading "Validador de autenticidade... de documento":', hasHeading ? '✓ CONFIRMED' : '✗ MISSING');
 if (!hasHeading) process.exit(1);
 
 // 4. Test formatUuidMask logic
@@ -70,7 +70,7 @@ function findRecord(searchQuery) {
 
 const match = findRecord(masked);
 console.log('\nLookup by masked code:', match ? `✓ FOUND -> ${match.nome} ${match.sobrenome}` : '✗ FAILED');
-if (!match || match.nome !== 'SHARIFULLAH') process.exit(1);
+if (!match || match.nome !== 'MOHAMMAD HAKIM') process.exit(1);
 
 // 6. Verify DOM IDs
 const idMatches = js.matchAll(/document\.getElementById\(['"]([^'"]+)['"]\)/g);

@@ -27,34 +27,33 @@ node test_suite.js
 
 | Campo (pt-BR) | Valor Cadastrado |
 | :--- | :--- |
-| **Situação** | `Válido até: 18 de junho de 2028` |
+| **Situacao** | `Valido até: 17/08/2025` |
 | **Código** | `1da556d388c046ec8d3379e1b5cf772f` |
-| **Nome** | `SHARIFULLAH` |
-| **Sobrenome** | `HAMDARD` |
-| **RNM** | `B269953J` |
-| **Data de nascimento** | `29/02/2004` |
-| **Nacionalidade** | `Afghanistan` |
+| **Nome** | `MOHAMMAD HAKIM` |
+| **Sobrenome** | `WAZIRI` |
+| **RNM** | `F907916R` |
+| **Data de nascimento** | `01/05/1987` |
+| **Nacionalidade** | `Afeganistão` |
 
 ---
 
 ## 📌 Especificações e Fluxo
 
-1. **Página de Pesquisa:**
+1. **Página de Pesquisa (Layout Mobile):**
    - Brasão oficial centralizado (`Logo/logo.jpeg`).
-   - Título: `Validador de autenticidade de documento`.
-   - Campo de entrada com rótulo `Código Verificador` e placeholder `Digite o código verificador`.
-   - O campo inicia completamente vazio no carregamento da página.
-   - O usuário digita ou cola manualmente o código.
-   - Botões lado a lado: `Validar` e `Limpar`.
+   - Título em duas linhas: `Validador de autenticidade`<br>`de documento`.
+   - Campo de entrada com rótulo `Código Verificador` e máscara `________-____-____-____-____________`.
+   - O campo inicia vazio e formata automaticamente com hífens (8-4-4-4-12) conforme a digitação.
+   - Botões centralizados lado a lado: `Validar` (azul) e `Limpar` (cinza claro).
    - Se o campo estiver vazio ao clicar em **Validar**, exibe mensagem: `Por favor, informe o código verificador.`
    - O botão **Limpar** limpa o campo de entrada e devolve o foco.
 2. **Modal de Carregamento:**
    - Caixa escura com texto `Aguarde...` conforme referência.
 3. **Página de Resultado:**
-   - Fundo cinza claro (`#e9ecef`).
+   - Fundo idêntico à referência mobile.
    - Título centralizado: `Documento autêntico`.
    - Subtítulo alinhado à esquerda: `Dados do documento`.
-   - Campos com rótulos em negrito e valores com peso regular.
-   - Botão azul centralizado com ícone e texto `Voltar`.
+   - Campos com rótulos e valores alinhados à esquerda (incluindo `Situacao: Valido até: 17/08/2025`).
+   - Botão cinza claro centralizado: `Voltar`.
 4. **Sem Conteúdo Adicional:**
    - Sem cabeçalhos ou rodapés desnecessários, sem seletores de idioma ou widgets de tradução.

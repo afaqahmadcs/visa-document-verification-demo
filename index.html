@@ -8,7 +8,7 @@
 </head>
 <body>
 
-  <!-- Página de Pesquisa (Fiel à captura de referência) -->
+  <!-- Página de Pesquisa (Fiel à captura mobile de referência) -->
   <main id="search-view" class="view-container search-layout">
     <div class="search-box">
       <!-- Brasão Centralizado -->
@@ -16,8 +16,8 @@
         <img src="Logo/logo.jpeg" alt="Logo" class="portal-logo" id="search-logo">
       </div>
 
-      <!-- Título em Português do Brasil -->
-      <h1 class="search-heading">Validador de autenticidade de documento</h1>
+      <!-- Título com quebra exata da imagem mobile -->
+      <h1 class="search-heading">Validador de autenticidade<br>de documento</h1>
 
       <!-- Formulário de Validação -->
       <form id="verification-form" class="verification-form" novalidate>
@@ -50,14 +50,14 @@
     </div>
   </main>
 
-  <!-- Modal de Carregamento (Fiel ao vídeo de referência) -->
+  <!-- Modal de Carregamento (Aguarde...) -->
   <div id="loading-overlay" class="loading-overlay hidden" aria-live="assertive" role="dialog" aria-modal="true">
     <div class="loading-box">
       <span class="loading-text">Aguarde...</span>
     </div>
   </div>
 
-  <!-- Página de Resultado do Documento (Fiel à captura de tela de referência) -->
+  <!-- Página de Resultado do Documento (Fiel à captura mobile de referência) -->
   <main id="result-view" class="view-container result-layout hidden">
     <div class="result-card">
       <!-- Brasão Centralizado -->
@@ -74,10 +74,10 @@
       <!-- Campos do Documento na Ordem Exata -->
       <div class="document-data-list">
         
-        <!-- Situação / Válido até -->
+        <!-- Situacao / Valido até -->
         <div class="data-field" id="field-situacao">
-          <div class="field-label">Situação:</div>
-          <div class="field-value" id="val-situacao">Válido até: 18 de junho de 2028</div>
+          <div class="field-label">Situacao:</div>
+          <div class="field-value" id="val-situacao">Valido até: 17/08/2025</div>
         </div>
 
         <!-- Código -->
@@ -89,45 +89,38 @@
         <!-- Nome -->
         <div class="data-field" id="field-nome">
           <div class="field-label">Nome:</div>
-          <div class="field-value" id="val-nome">SHARIFULLAH</div>
+          <div class="field-value" id="val-nome">MOHAMMAD HAKIM</div>
         </div>
 
         <!-- Sobrenome -->
         <div class="data-field" id="field-sobrenome">
           <div class="field-label">Sobrenome:</div>
-          <div class="field-value" id="val-sobrenome">HAMDARD</div>
+          <div class="field-value" id="val-sobrenome">WAZIRI</div>
         </div>
 
         <!-- RNM -->
         <div class="data-field" id="field-rnm">
           <div class="field-label">RNM:</div>
-          <div class="field-value" id="val-rnm">B269953J</div>
+          <div class="field-value" id="val-rnm">F907916R</div>
         </div>
 
         <!-- Data de nascimento -->
         <div class="data-field" id="field-nascimento">
           <div class="field-label">Data de nascimento:</div>
-          <div class="field-value" id="val-nascimento">29/02/2004</div>
+          <div class="field-value" id="val-nascimento">01/05/1987</div>
         </div>
 
         <!-- Nacionalidade -->
         <div class="data-field" id="field-nacionalidade">
           <div class="field-label">Nacionalidade:</div>
-          <div class="field-value" id="val-nacionalidade">Afghanistan</div>
+          <div class="field-value" id="val-nacionalidade">Afeganistão</div>
         </div>
 
       </div>
 
-      <!-- Controle de Voltar Centralizado Conforme Referência -->
+      <!-- Botão Voltar Centralizado Conforme Referência Mobile -->
       <div class="result-actions">
-        <button type="button" id="btn-voltar" class="go-back-btn" aria-label="Voltar">
-          <span class="go-back-icon-box" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-          </span>
-          <span class="go-back-label">Voltar</span>
-        </button>
+        <button type="button" id="btn-voltar" class="btn btn-voltar-simple" aria-label="Voltar">Voltar</button>
       </div>
     </div>
   </main>
@@ -155,14 +148,7 @@
       </div>
 
       <div class="result-actions">
-        <button type="button" id="btn-voltar-notfound" class="go-back-btn" aria-label="Voltar">
-          <span class="go-back-icon-box" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-          </span>
-          <span class="go-back-label">Voltar</span>
-        </button>
+        <button type="button" id="btn-voltar-notfound" class="btn btn-voltar-simple" aria-label="Voltar">Voltar</button>
       </div>
     </div>
   </main>

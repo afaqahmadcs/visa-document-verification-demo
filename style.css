@@ -1,7 +1,6 @@
 /* ==========================================================================
    Validador de Autenticidade de Documento
-   Português do Brasil (pt-BR) - Estilos Fiéis à Referência
-   Design Responsivo e Tipografia Otimizada
+   Português do Brasil (pt-BR) - Estilos Fiéis à Referência Mobile
    ========================================================================== */
 
 /* Reset & Box Sizing */
@@ -17,7 +16,7 @@ html, body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f7f7f7;
+  background-color: #fafafa;
   color: #333333;
 }
 
@@ -33,21 +32,21 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   box-sizing: border-box;
 }
 
 /* --------------------------------------------------------------------------
-   Página de Pesquisa (Fiel à Imagem Enviada)
+   Página de Pesquisa (Fiel às Imagens 1 e 2 do Mobile)
    -------------------------------------------------------------------------- */
 .search-layout {
-  background-color: #f7f7f7;
-  padding: 28px 14px;
+  background-color: #fafafa;
+  padding: 46px 16px 60px 16px;
 }
 
 .search-box {
   width: 100%;
-  max-width: 580px;
+  max-width: 284px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -59,31 +58,30 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .result-logo-wrapper {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .portal-logo {
-  width: 78px;
+  width: 70px;
   height: auto;
-  max-height: 92px;
+  max-height: 86px;
   object-fit: contain;
   display: block;
 }
 
-/* Título Centralizado - Tamanho Proporcional e Responsivo */
+/* Título em Duas Linhas Conforme Imagem */
 .search-heading {
-  font-size: clamp(18px, 4vw, 21.5px);
-  font-weight: 700;
-  color: #555555;
-  line-height: 1.3;
+  font-size: 20px;
+  font-weight: 600;
+  color: #505050;
+  line-height: 1.25;
   margin-bottom: 20px;
   text-align: center;
   letter-spacing: -0.01em;
-  padding: 0 8px;
 }
 
 /* Formulário de Validação */
@@ -94,35 +92,32 @@ html, body {
   align-items: center;
 }
 
-/* Campo de Entrada com Borda Azul e Layout Amplo Responsivo */
+/* Campo de Entrada com Largura Fiel às Capturas (284px) */
 .input-group {
   width: 100%;
-  max-width: 540px;
+  max-width: 284px;
   background-color: #ffffff;
-  border: 1px solid #70b0ea;
+  border: 1px solid #b0bec5;
   border-radius: 4px;
-  padding: 7px 12px 8px 12px;
+  padding: 5px 8px 6px 8px;
   text-align: left;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.15s ease;
   box-sizing: border-box;
-  overflow: hidden;
 }
 
 .input-group:focus-within {
-  border-color: #42a5f5;
-  box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.2);
+  border-color: #4ba3e3;
 }
 
 .input-group.input-error {
   border-color: #dc3545;
-  box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.2);
 }
 
 .floating-label {
   display: block;
   font-size: 11px;
-  font-weight: 600;
-  color: #495057;
+  font-weight: 500;
+  color: #606060;
   line-height: 1.2;
   margin-bottom: 3px;
   user-select: none;
@@ -132,27 +127,26 @@ html, body {
   width: 100%;
   border: none;
   outline: none;
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  font-size: clamp(11.5px, 2.9vw, 13.5px);
-  font-weight: 500;
-  color: #212529;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  color: #333333;
   background: transparent;
   padding: 0;
-  letter-spacing: clamp(0.2px, 0.35vw, 0.4px);
-  box-sizing: border-box;
+  letter-spacing: 0.1px;
 }
 
 .codigo-input::placeholder {
-  color: #64748b;
-  font-size: clamp(11.5px, 2.9vw, 13.5px);
-  letter-spacing: clamp(0.2px, 0.35vw, 0.4px);
-  opacity: 0.8;
+  color: #757575;
+  font-size: 13px;
+  letter-spacing: 0.1px;
+  opacity: 0.85;
 }
 
 /* Mensagem de Erro de Validação */
 .input-error-msg {
   width: 100%;
-  max-width: 540px;
+  max-width: 284px;
   font-size: 12px;
   font-weight: 500;
   color: #dc3545;
@@ -161,50 +155,48 @@ html, body {
   padding-left: 2px;
 }
 
-/* Botões de Ação Centralizados Conforme Imagem */
+/* Botões de Ação Centralizados Lado a Lado */
 .button-group {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;
-  margin-top: 16px;
+  gap: 10px;
+  margin-top: 14px;
   width: 100%;
-  max-width: 540px;
+  max-width: 284px;
 }
 
 .btn {
   font-family: inherit;
   font-size: 13.5px;
-  font-weight: 500;
+  font-weight: 400;
   padding: 7px 20px;
   border-radius: 4px;
   cursor: pointer;
   outline: none;
   transition: background-color 0.15s ease, opacity 0.15s ease;
-  min-width: 84px;
+  min-width: 82px;
   text-align: center;
+  border: none;
 }
 
 .btn-primary {
-  background-color: #7caae8;
+  background-color: #5b9be6;
   color: #ffffff;
-  border: 1px solid #7caae8;
 }
 
 .btn-primary:hover {
-  background-color: #689ae0;
-  border-color: #689ae0;
+  background-color: #4a8cd9;
 }
 
 .btn-secondary {
-  background-color: #f2f4f6;
+  background-color: #f2f2f2;
   color: #555555;
-  border: 1px solid #dee2e6;
 }
 
 .btn-secondary:hover {
-  background-color: #e9ecef;
-  color: #212529;
+  background-color: #e6e6e6;
+  color: #333333;
 }
 
 /* --------------------------------------------------------------------------
@@ -238,25 +230,25 @@ html, body {
 }
 
 /* --------------------------------------------------------------------------
-   Página de Resultado do Documento (Fiel às Capturas de Referência)
+   Página de Resultado do Documento (Fiel à Imagem 3 do Mobile)
    -------------------------------------------------------------------------- */
 .result-layout {
-  background-color: #e9ecef;
-  padding: 28px 16px 40px;
+  background-color: #fafafa;
+  padding: 40px 16px 60px 16px;
 }
 
 .result-card {
   width: 100%;
-  max-width: 370px;
+  max-width: 284px;
   display: flex;
   flex-direction: column;
 }
 
 /* "Documento autêntico" Centralizado */
 .result-heading {
-  font-size: clamp(18px, 4vw, 20.5px);
-  font-weight: 700;
-  color: #333333;
+  font-size: 21px;
+  font-weight: 600;
+  color: #505050;
   margin-bottom: 18px;
   text-align: center;
   letter-spacing: -0.01em;
@@ -264,10 +256,10 @@ html, body {
 
 /* "Dados do documento" Alinhado à Esquerda */
 .result-section-heading {
-  font-size: 15.5px;
+  font-size: 16px;
   font-weight: 700;
-  color: #3a3a3a;
-  margin-bottom: 16px;
+  color: #505050;
+  margin-bottom: 15px;
   text-align: left;
 }
 
@@ -285,9 +277,9 @@ html, body {
 
 /* Rótulos em Negrito & Valores com Peso Normal */
 .field-label {
-  font-size: 13.5px;
-  font-weight: 700;
-  color: #3a3a3a;
+  font-size: 13px;
+  font-weight: 600;
+  color: #555555;
   line-height: 1.3;
   margin-bottom: 2px;
   text-align: left;
@@ -296,14 +288,14 @@ html, body {
 .field-value {
   font-size: 13.5px;
   font-weight: 400;
-  color: #4a4a4a;
+  color: #666666;
   line-height: 1.35;
   text-align: left;
   word-break: break-all;
   overflow-wrap: anywhere;
 }
 
-/* Botão Voltar Conforme Referência */
+/* Botão Voltar Centralizado Conforme Imagem 3 */
 .result-actions {
   display: flex;
   justify-content: center;
@@ -312,44 +304,21 @@ html, body {
   width: 100%;
 }
 
-.go-back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: transparent;
+.btn-voltar-simple {
+  background-color: #f2f2f2;
+  color: #555555;
   border: none;
+  border-radius: 4px;
+  padding: 8px 26px;
+  font-size: 13px;
+  font-weight: 400;
   cursor: pointer;
-  padding: 6px 14px;
-  border-radius: 6px;
-  transition: opacity 0.15s ease, transform 0.1s ease;
-  user-select: none;
+  transition: background-color 0.15s ease;
 }
 
-.go-back-btn:hover {
-  opacity: 0.88;
-}
-
-.go-back-btn:active {
-  transform: translateY(1px);
-}
-
-.go-back-icon-box {
-  width: 36px;
-  height: 36px;
-  background-color: #2b70c9;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-  flex-shrink: 0;
-}
-
-.go-back-label {
-  font-size: 14px;
-  font-weight: 500;
-  color: #495057;
-  letter-spacing: -0.01em;
+.btn-voltar-simple:hover {
+  background-color: #e6e6e6;
+  color: #333333;
 }
 
 /* Estilos de Documento Não Localizado */
@@ -363,61 +332,14 @@ html, body {
 }
 
 .font-mono {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", Courier, monospace;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, Courier, monospace;
   font-size: 12.5px;
 }
 
 .notfound-info {
-  font-size: 13px;
+  font-size: 12.5px;
   color: #555555;
   margin-top: 10px;
   line-height: 1.4;
   text-align: left;
-}
-
-/* --------------------------------------------------------------------------
-   Responsividade Mobile Avançada
-   -------------------------------------------------------------------------- */
-@media (max-width: 640px) {
-  .search-layout {
-    padding: 20px 12px;
-  }
-
-  .search-box {
-    max-width: 100%;
-  }
-
-  .input-group {
-    max-width: 100%;
-    padding: 6px 10px 8px 10px;
-  }
-
-  .portal-logo {
-    width: 72px;
-  }
-}
-
-@media (max-width: 380px) {
-  .search-heading {
-    font-size: 17px;
-  }
-
-  .result-heading {
-    font-size: 18px;
-  }
-
-  .field-label, .field-value {
-    font-size: 12.5px;
-  }
-
-  .btn {
-    padding: 6px 16px;
-    font-size: 13px;
-    min-width: 76px;
-  }
-
-  .go-back-icon-box {
-    width: 32px;
-    height: 32px;
-  }
 }
