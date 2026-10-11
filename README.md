@@ -1,54 +1,68 @@
-# Authentic Document Verification
+# Validador de Autenticidade de Documento
 
-A realistic document authenticity verification portal matching the exact client reference design and record specification.
+Portal de verificação de autenticidade de documentos em **Português do Brasil (`pt-BR`)**, desenvolvido estritamente conforme o fluxo e capturas de tela de referência, com suporte integrado a tradução multilíngue via Google Translate (incluindo Inglês, Urdu e outros idiomas).
 
 ---
 
-## 🚀 How to Run Locally
+## 🌐 Suporte a Idiomas & Tradução
+- **Idioma Padrão:** Português do Brasil (`pt-BR`).
+- **Tradução Dinâmica:** Integração oficial com a ferramenta do Google Translate.
+- **Seletores Rápidos:** Botões de acesso direto na barra superior:
+  - 🇧🇷 **Português** (Original da referência)
+  - 🇬🇧 **English**
+  - 🇵🇰 **اردو (Urdu)**
+  - Menu suspenso para mais de 100 idiomas adicionais.
+- **Preservação de Dados:** Códigos verificadores e dados nominais do titular possuem a tag `notranslate` para evitar distorções nas consultas.
 
-### Option 1: Open Directly in Browser
-Double-click [`index.html`](file:///d:/US%20Client/visa-verification-demo/index.html) or open with any modern browser.
+---
 
-### Option 2: Local Python Server
-Run in this directory:
+## 🚀 Como Executar Localmente
+
+### Opção 1: Abrir Diretamente no Navegador
+Dê um duplo clique no arquivo [`index.html`](file:///d:/US%20Client/visa-verification-demo/index.html) ou abra com qualquer navegador moderno.
+
+### Opção 2: Servidor HTTP Local (Python)
+Execute no terminal da pasta:
 ```bash
 python -m http.server 8080
 ```
-Then visit: `http://localhost:8080` in your browser.
+Em seguida, acesse: `http://localhost:8080`
 
-### Option 3: Automated Validation Test Suite
-Run via Node.js:
+### Opção 3: Executar Testes Automatizados (Node.js)
 ```bash
 node test_suite.js
 ```
 
 ---
 
-## 📋 Active Verification Record
+## 📋 Registro de Validação Configurado
 
-| Field | Stored Record Value |
+| Campo (pt-BR) | Valor Cadastrado |
 | :--- | :--- |
-| **Situation** | `Valid until: June 18, 2028` |
-| **Code** | `1da556d388c046ec8d3379e1b5cf772f` |
-| **Name** | `SHARIFULLAH` |
-| **Surname** | `HAMDARD` |
+| **Situação** | `Válido até: 18 de junho de 2028` |
+| **Código** | `1da556d388c046ec8d3379e1b5cf772f` |
+| **Nome** | `SHARIFULLAH` |
+| **Sobrenome** | `HAMDARD` |
 | **RNM** | `B269953J` |
-| **Date of birth** | `29/02/2004` |
-| **Nationality** | `Afghanistan` |
+| **Data de nascimento** | `29/02/2004` |
+| **Nacionalidade** | `Afghanistan` |
 
 ---
 
-## 📌 Document Result Page Structure (Exact Screenshot Match)
+## 📌 Estrutura e Conformidade com as Capturas
 
-- **Header:** Centered official crest (`Logo/logo.jpeg`)
-- **Heading:** Centered `Authentic document`
-- **Section Heading:** Left-aligned `Document data`
-- **Data Fields:**
-  - **Situation:** `Valid until: June 18, 2028`
-  - **Code:** `1da556d388c046ec8d3379e1b5cf772f`
-  - **Name:** `SHARIFULLAH`
-  - **Surname:** `HAMDARD`
-  - **RNM:** `B269953J`
-  - **Date of birth:** `29/02/2004`
-  - **Nationality:** `Afghanistan`
-- **Bottom Control:** Centered blue rounded square button with `go back`
+1. **Página de Pesquisa:**
+   - Brasão oficial centralizado (`Logo/logo.jpeg`).
+   - Título: `Validador de autenticidade de documento`.
+   - Campo com rótulo `Código Verificador` pré-preenchido com `1da556d388c046ec8d3379e1b5cf772f`.
+   - Botões lado a lado: `Validar` e `Limpar`.
+2. **Modal Intermediário:**
+   - Caixa escura com texto `Aguarde...` conforme vídeo.
+3. **Página de Resultado:**
+   - Fundo cinza claro (`#e9ecef`).
+   - Título centralizado: `Documento autêntico`.
+   - Subtítulo alinhado à esquerda: `Dados do documento`.
+   - Campos com rótulos em negrito e valores alinhados à esquerda.
+   - Botão azul centralizado com ícone e texto `Voltar`.
+4. **Aviso Institucional:**
+   - Identificação transparente de demonstração para consultoria privada sem afiliação estatal.

@@ -1,36 +1,36 @@
 /**
- * Authentic Document Verification
- * Exact match to user's reference screenshot
+ * Validador de Autenticidade de Documento
+ * Português do Brasil (pt-BR) com Suporte ao Google Translate
  */
 
 'use strict';
 
 /* ==========================================================================
-   Document Registry Data Source
-   Configured strictly with the specified client record
+   Base de Dados de Validação de Documentos
+   Dados estritamente fiéis ao registro solicitado pelo cliente
    ========================================================================== */
 const VERIFICATION_RECORDS = [
   {
     codigo: '1da556d388c046ec8d3379e1b5cf772f',
-    situation: 'Valid until: June 18, 2028',
-    name: 'SHARIFULLAH',
-    surname: 'HAMDARD',
+    situacao: 'Válido até: 18 de junho de 2028',
+    nome: 'SHARIFULLAH',
+    sobrenome: 'HAMDARD',
     rnm: 'B269953J',
-    dob: '29/02/2004',
-    nationality: 'Afghanistan'
+    nascimento: '29/02/2004',
+    nacionalidade: 'Afghanistan'
   }
 ];
 
 /* ==========================================================================
-   DOM Element Selectors
+   Seletores de Elementos do DOM
    ========================================================================== */
-// Views
+// Visualizações
 const searchView = document.getElementById('search-view');
 const resultView = document.getElementById('result-view');
 const notFoundView = document.getElementById('notfound-view');
 const loadingOverlay = document.getElementById('loading-overlay');
 
-// Form controls
+// Formulário de Consulta
 const form = document.getElementById('verification-form');
 const input = document.getElementById('codigo-input');
 const inputGroup = input ? input.closest('.input-group') : null;
@@ -38,28 +38,31 @@ const inputError = document.getElementById('input-error');
 const btnValidar = document.getElementById('btn-validar');
 const btnLimpar = document.getElementById('btn-limpar');
 
-// Result fields (exact match to screenshot)
-const valSituation = document.getElementById('val-situation');
-const valCode = document.getElementById('val-code');
-const valName = document.getElementById('val-name');
-const valSurname = document.getElementById('val-surname');
+// Campos do Resultado (Ordem estrita da referência)
+const valSituacao = document.getElementById('val-situacao');
+const valCodigo = document.getElementById('val-codigo');
+const valNome = document.getElementById('val-nome');
+const valSobrenome = document.getElementById('val-sobrenome');
 const valRnm = document.getElementById('val-rnm');
-const valDob = document.getElementById('val-dob');
-const valNationality = document.getElementById('val-nationality');
+const valNascimento = document.getElementById('val-nascimento');
+const valNacionalidade = document.getElementById('val-nacionalidade');
 
-// Missing code field
+// Campo de Código Não Localizado
 const valMissingCode = document.getElementById('val-missing-code');
 
-// Go back controls
+// Botões de Voltar
 const btnVoltar = document.getElementById('btn-voltar');
 const btnVoltarNotFound = document.getElementById('btn-voltar-notfound');
 
+// Botões de Troca de Idioma Rápida
+const quickLangButtons = document.querySelectorAll('.lang-btn');
+
 /* ==========================================================================
-   Helper & Normalization Functions
+   Funções de Normalização e Busca
    ========================================================================== */
 
 /**
- * Normalize code for comparison (trims spaces and handles hyphens)
+ * Normaliza o código eliminando espaços e hífens para comparação segura
  */
 function normalizeCode(str) {
   if (!str) return '';
@@ -67,7 +70,7 @@ function normalizeCode(str) {
 }
 
 /**
- * Find matching document record in available dataset
+ * Localiza o registro correspondente no repositório local
  */
 function findRecord(searchQuery) {
   if (!searchQuery) return null;
@@ -82,11 +85,11 @@ function findRecord(searchQuery) {
 }
 
 /**
- * Show validation error
+ * Exibe mensagem de erro de validação
  */
 function showError(message) {
   if (inputError) {
-    inputError.textContent = message || 'Please enter the verification code.';
+    inputError.textContent = message || 'Por favor, informe o código verificador.';
     inputError.classList.remove('hidden');
   }
   if (inputGroup) {
@@ -98,7 +101,7 @@ function showError(message) {
 }
 
 /**
- * Clear validation error
+ * Remove indicação visual de erro
  */
 function clearError() {
   if (inputError) {
@@ -110,7 +113,7 @@ function clearError() {
 }
 
 /**
- * Switch active visible view
+ * Alterna entre as telas da aplicação
  */
 function showView(viewToShow) {
   [searchView, resultView, notFoundView].forEach(v => {
@@ -123,22 +126,22 @@ function showView(viewToShow) {
 }
 
 /**
- * Render document details on result page
+ * Renderiza os dados do documento na tela de resultado
  */
 function renderResult(record, queryEntered) {
-  if (valSituation) valSituation.textContent = record.situation;
-  if (valCode) valCode.textContent = record.codigo;
-  if (valName) valName.textContent = record.name;
-  if (valSurname) valSurname.textContent = record.surname;
+  if (valSituacao) valSituacao.textContent = record.situacao;
+  if (valCodigo) valCodigo.textContent = record.codigo;
+  if (valNome) valNome.textContent = record.nome;
+  if (valSobrenome) valSobrenome.textContent = record.sobrenome;
   if (valRnm) valRnm.textContent = record.rnm;
-  if (valDob) valDob.textContent = record.dob;
-  if (valNationality) valNationality.textContent = record.nationality;
+  if (valNascimento) valNascimento.textContent = record.nascimento;
+  if (valNacionalidade) valNacionalidade.textContent = record.nacionalidade;
 
   showView(resultView);
 }
 
 /**
- * Render not found page
+ * Renderiza tela de código não localizado
  */
 function renderNotFound(enteredCode) {
   if (valMissingCode) {
@@ -148,25 +151,25 @@ function renderNotFound(enteredCode) {
 }
 
 /**
- * Execute verification with reference loading overlay
+ * Executa a verificação com animação realista "Aguarde..."
  */
 function verifyDocument(codeToVerify) {
   const code = (codeToVerify !== undefined ? codeToVerify : (input ? input.value : '')).trim();
 
-  // Validate empty input
+  // Validação de campo vazio
   if (!code) {
-    showError('Please enter the verification code.');
+    showError('Por favor, informe o código verificador.');
     return;
   }
 
   clearError();
 
-  // Show loading modal "Aguarde..."
+  // Exibe modal "Aguarde..."
   if (loadingOverlay) {
     loadingOverlay.classList.remove('hidden');
   }
 
-  // Realistic processing duration (~650ms)
+  // Tempo de resposta realista (~600ms)
   setTimeout(() => {
     if (loadingOverlay) {
       loadingOverlay.classList.add('hidden');
@@ -178,11 +181,11 @@ function verifyDocument(codeToVerify) {
     } else {
       renderNotFound(code);
     }
-  }, 650);
+  }, 600);
 }
 
 /**
- * Reset to search page
+ * Retorna para a tela de pesquisa
  */
 function goBackToSearch() {
   showView(searchView);
@@ -193,10 +196,45 @@ function goBackToSearch() {
 }
 
 /* ==========================================================================
-   Event Listeners
+   Suporte de Tradução (Google Translate)
    ========================================================================== */
 
-// Form submission
+/**
+ * Altera idioma utilizando a API e componentes do Google Translate
+ */
+function setGoogleLanguage(targetLang) {
+  // Atualiza classe ativa dos botões rápidos
+  quickLangButtons.forEach(btn => {
+    if (btn.getAttribute('data-lang') === targetLang) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+
+  // Tenta alterar diretamente o seletor nativo do Google Translate
+  const select = document.querySelector('.goog-te-combo');
+  if (select) {
+    select.value = targetLang;
+    select.dispatchEvent(new Event('change'));
+  } else {
+    // Abordagem via cookie do Google Translate caso o seletor ainda não tenha carregado
+    if (targetLang === 'pt') {
+      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + window.location.hostname;
+    } else {
+      document.cookie = 'googtrans=/pt/' + targetLang + '; path=/;';
+      document.cookie = 'googtrans=/pt/' + targetLang + '; path=/; domain=' + window.location.hostname;
+    }
+    window.location.reload();
+  }
+}
+
+/* ==========================================================================
+   Ouvintes de Eventos
+   ========================================================================== */
+
+// Submissão do formulário
 if (form) {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -204,14 +242,14 @@ if (form) {
   });
 }
 
-// Input typing
+// Digitação no campo de entrada
 if (input) {
   input.addEventListener('input', () => {
     clearError();
   });
 }
 
-// Limpar button
+// Botão Limpar
 if (btnLimpar) {
   btnLimpar.addEventListener('click', () => {
     if (input) {
@@ -222,7 +260,7 @@ if (btnLimpar) {
   });
 }
 
-// Go back buttons
+// Botões Voltar
 if (btnVoltar) {
   btnVoltar.addEventListener('click', goBackToSearch);
 }
@@ -231,7 +269,17 @@ if (btnVoltarNotFound) {
   btnVoltarNotFound.addEventListener('click', goBackToSearch);
 }
 
-// Check URL query parameters (e.g. ?codigo=... or ?code=...)
+// Botões rápidos de idioma (Português, English, اردو)
+quickLangButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const lang = btn.getAttribute('data-lang');
+    if (lang) {
+      setGoogleLanguage(lang);
+    }
+  });
+});
+
+// Inicialização com suporte a parâmetros de URL (?codigo=...)
 window.addEventListener('DOMContentLoaded', () => {
   const urlParams = new URLSearchParams(window.location.search);
   const codeParam = urlParams.get('codigo') || urlParams.get('code') || urlParams.get('ref');

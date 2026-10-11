@@ -1,6 +1,6 @@
 /* ==========================================================================
    Validador de Autenticidade de Documento
-   Exact match to the client's reference screenshots & design
+   Português do Brasil (pt-BR) - Estilos Fiéis à Referência
    ========================================================================== */
 
 /* Reset & Box Sizing */
@@ -16,21 +16,152 @@ html, body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f7f7f7;
+  color: #333333;
 }
 
-/* Visibility Utility */
+body {
+  top: 0 !important;
+  position: static !important;
+}
+
+/* Ocultar barra intrusiva padrão do Google Translate */
+.goog-te-banner-frame,
+.skiptranslate > iframe {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+body > .skiptranslate {
+  display: none !important;
+}
+
+/* Utilidade de Visibilidade */
 .hidden {
   display: none !important;
 }
 
-/* Base View Layout */
-.view-container {
-  width: 100%;
-  min-height: 100vh;
+/* --------------------------------------------------------------------------
+   Barra Superior: Aviso de Demonstração & Tradutor (Google Translate)
+   -------------------------------------------------------------------------- */
+.top-bar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 8px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.top-bar-content {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.demo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #4a5568;
+  background-color: #f1f5f9;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid #cbd5e1;
+}
+
+.demo-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #2b70c9;
+  display: inline-block;
+}
+
+.lang-selector-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.lang-caption {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.quick-lang-buttons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.lang-btn {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  background-color: #f8fafc;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 3px 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.lang-btn:hover {
+  background-color: #e2e8f0;
+  color: #0f172a;
+}
+
+.lang-btn.active {
+  background-color: #2b70c9;
+  color: #ffffff;
+  border-color: #2b70c9;
+  font-weight: 600;
+}
+
+.google-translate-container {
+  display: inline-block;
+}
+
+/* Customização do Elemento Nativo do Google Translate */
+.goog-te-gadget {
+  font-family: inherit !important;
+  font-size: 12px !important;
+  color: #64748b !important;
+}
+
+.goog-te-gadget .goog-te-combo {
+  font-family: inherit !important;
+  font-size: 12px !important;
+  color: #1e293b !important;
+  background-color: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 4px !important;
+  padding: 3px 6px !important;
+  outline: none !important;
+  cursor: pointer !important;
 }
 
 /* --------------------------------------------------------------------------
-   Search Page View (Matches Reference Screenshot Panel 2)
+   Layout das Visualizações Principais
+   -------------------------------------------------------------------------- */
+.view-container {
+  width: 100%;
+  min-height: calc(100vh - 120px);
+}
+
+/* --------------------------------------------------------------------------
+   Página de Pesquisa (Fiel à Captura do Vídeo / Painel 2)
    -------------------------------------------------------------------------- */
 .search-layout {
   display: flex;
@@ -38,7 +169,7 @@ html, body {
   align-items: center;
   justify-content: center;
   background-color: #f7f7f7;
-  padding: 24px 16px;
+  padding: 36px 16px 48px;
 }
 
 .search-box {
@@ -50,7 +181,7 @@ html, body {
   text-align: center;
 }
 
-/* Centered Logo */
+/* Brasão Centralizado */
 .logo-wrapper {
   display: flex;
   justify-content: center;
@@ -70,7 +201,7 @@ html, body {
   display: block;
 }
 
-/* Portuguese Heading on Search */
+/* Título em Português do Brasil */
 .search-heading {
   font-size: 19px;
   font-weight: 700;
@@ -81,7 +212,7 @@ html, body {
   letter-spacing: -0.01em;
 }
 
-/* Verification Form & Input Box */
+/* Formulário & Campo de Entrada */
 .verification-form {
   width: 100%;
   display: flex;
@@ -138,7 +269,7 @@ html, body {
   font-size: 13px;
 }
 
-/* Error message feedback */
+/* Mensagem de Erro de Validação */
 .input-error-msg {
   width: 100%;
   max-width: 290px;
@@ -150,7 +281,7 @@ html, body {
   padding-left: 2px;
 }
 
-/* Action Buttons Side-by-Side */
+/* Botões de Ação lado a lado */
 .button-group {
   display: flex;
   justify-content: center;
@@ -197,7 +328,7 @@ html, body {
 }
 
 /* --------------------------------------------------------------------------
-   Loading Modal (Matches Reference Video/Screenshots)
+   Modal de Carregamento ("Aguarde...")
    -------------------------------------------------------------------------- */
 .loading-overlay {
   position: fixed;
@@ -227,9 +358,9 @@ html, body {
 }
 
 /* --------------------------------------------------------------------------
-   Result Page View (Exact match to supplied client reference screenshot)
-   Light grey background, centered logo, centered "Authentic document" heading,
-   left-aligned "Document data" and fields, bottom centered "go back" button
+   Página de Resultado do Documento (Fiel às Capturas de Referência)
+   Fundo cinza claro, brasão centralizado, "Documento autêntico" centralizado,
+   "Dados do documento" à esquerda e botão "Voltar" centralizado abaixo
    -------------------------------------------------------------------------- */
 .result-layout {
   background-color: #e9ecef;
@@ -246,7 +377,7 @@ html, body {
   flex-direction: column;
 }
 
-/* "Authentic document" Heading: Centered */
+/* "Documento autêntico" Centralizado */
 .result-heading {
   font-size: 23px;
   font-weight: 700;
@@ -256,7 +387,7 @@ html, body {
   letter-spacing: -0.01em;
 }
 
-/* "Document data" Section Heading: Left-aligned */
+/* "Dados do documento" Alinhado à Esquerda */
 .result-section-heading {
   font-size: 17px;
   font-weight: 700;
@@ -265,7 +396,7 @@ html, body {
   text-align: left;
 }
 
-/* Document Data List */
+/* Lista de Dados do Documento */
 .document-data-list {
   display: flex;
   flex-direction: column;
@@ -277,7 +408,7 @@ html, body {
   text-align: left;
 }
 
-/* Bold Labels & Regular-weight Values */
+/* Rótulos em Negrito & Valores com Peso Normal */
 .field-label {
   font-size: 15px;
   font-weight: 700;
@@ -296,7 +427,7 @@ html, body {
   word-break: break-all;
 }
 
-/* "go back" Control matching reference screenshot */
+/* Botão Voltar Conforme Referência */
 .result-actions {
   display: flex;
   justify-content: center;
@@ -312,7 +443,7 @@ html, body {
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 6px;
   transition: opacity 0.15s ease, transform 0.1s ease;
   user-select: none;
@@ -345,7 +476,7 @@ html, body {
   letter-spacing: -0.01em;
 }
 
-/* Not Found Adjustments */
+/* Estilos de Documento Não Localizado */
 .notfound-heading {
   color: #c92a2a;
 }
@@ -369,15 +500,46 @@ html, body {
 }
 
 /* --------------------------------------------------------------------------
-   Mobile Specific Media Queries
+   Rodapé Institucional / Aviso de Consultoria Privada
    -------------------------------------------------------------------------- */
+.portal-disclaimer {
+  background-color: #f1f5f9;
+  border-top: 1px solid #e2e8f0;
+  padding: 16px 20px;
+  text-align: center;
+  margin-top: auto;
+}
+
+.disclaimer-content p {
+  max-width: 680px;
+  margin: 0 auto;
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   Responsividade Mobile
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  .top-bar-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .lang-selector-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
 @media (max-width: 480px) {
   .search-layout {
-    padding: 20px 16px;
+    padding: 24px 16px 36px;
   }
 
   .result-layout {
-    padding: 24px 16px 40px 16px;
+    padding: 24px 16px 40px;
   }
 
   .portal-logo {

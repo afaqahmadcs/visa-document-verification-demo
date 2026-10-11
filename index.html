@@ -1,25 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Authentic document | Document Authenticity Verification</title>
+  <title>Documento autêntico | Validador de autenticidade de documento</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Search Page View -->
-  <main id="search-view" class="view-container search-layout">
-    <div class="search-box">
-      <!-- Centered Logo -->
-      <div class="logo-wrapper">
-        <img src="Logo/logo.jpeg" alt="Logo" class="portal-logo" id="search-logo">
+  <!-- Barra Superior de Idiomas & Aviso de Demonstração -->
+  <header class="top-bar">
+    <div class="top-bar-content">
+      <div class="demo-badge">
+        <span class="demo-dot" aria-hidden="true"></span>
+        <span>Ambiente de Demonstração — Consultoria Privada</span>
       </div>
 
-      <!-- Heading -->
+      <!-- Seletor de Idioma / Google Translate -->
+      <div class="lang-selector-group">
+        <span class="lang-caption">Idioma / Language:</span>
+        <div class="quick-lang-buttons" role="group" aria-label="Opções de Tradução">
+          <button type="button" class="lang-btn active" data-lang="pt" title="Português do Brasil">Português</button>
+          <button type="button" class="lang-btn" data-lang="en" title="English">English</button>
+          <button type="button" class="lang-btn" data-lang="ur" title="اردو">اردو</button>
+        </div>
+        <div id="google_translate_element" class="google-translate-container"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Página de Pesquisa (Fiel à captura de referência) -->
+  <main id="search-view" class="view-container search-layout">
+    <div class="search-box">
+      <!-- Brasão Centralizado -->
+      <div class="logo-wrapper">
+        <img src="Logo/logo.jpeg" alt="Logotipo da Consultoria" class="portal-logo" id="search-logo">
+      </div>
+
+      <!-- Título em Português do Brasil -->
       <h1 class="search-heading">Validador de<br>autenticidade de<br>documento</h1>
 
-      <!-- Verification Form -->
+      <!-- Formulário de Validação -->
       <form id="verification-form" class="verification-form" novalidate>
         <div class="input-group">
           <label for="codigo-input" class="floating-label">Código Verificador</label>
@@ -27,7 +48,8 @@
             type="text" 
             id="codigo-input" 
             name="codigo" 
-            class="codigo-input" 
+            class="codigo-input notranslate" 
+            translate="no"
             value="1da556d388c046ec8d3379e1b5cf772f"
             autocomplete="off" 
             spellcheck="false"
@@ -35,12 +57,12 @@
           >
         </div>
 
-        <!-- Inline Validation Error -->
+        <!-- Mensagem de Validação em Português -->
         <div id="input-error" class="input-error-msg hidden" role="alert">
-          Please enter the verification code.
+          Por favor, informe o código verificador.
         </div>
 
-        <!-- Action Buttons Side-by-Side -->
+        <!-- Botões de Ação lado a lado -->
         <div class="button-group">
           <button type="submit" id="btn-validar" class="btn btn-primary">Validar</button>
           <button type="button" id="btn-limpar" class="btn btn-secondary">Limpar</button>
@@ -49,123 +71,144 @@
     </div>
   </main>
 
-  <!-- Loading Modal Overlay (Matches Reference Video/Screenshots) -->
+  <!-- Modal de Carregamento (Fiel ao vídeo de referência) -->
   <div id="loading-overlay" class="loading-overlay hidden" aria-live="assertive" role="dialog" aria-modal="true">
     <div class="loading-box">
       <span class="loading-text">Aguarde...</span>
     </div>
   </div>
 
-  <!-- Document Result Page View (Exact match to supplied client screenshot) -->
+  <!-- Página de Resultado do Documento (Fiel à captura de tela de referência) -->
   <main id="result-view" class="view-container result-layout hidden">
     <div class="result-card">
-      <!-- Centered Logo at Top -->
+      <!-- Brasão Centralizado -->
       <div class="logo-wrapper result-logo-wrapper">
-        <img src="Logo/logo.jpeg" alt="Logo" class="portal-logo" id="result-logo">
+        <img src="Logo/logo.jpeg" alt="Logotipo da Consultoria" class="portal-logo" id="result-logo">
       </div>
 
-      <!-- Main Result Heading: Centered -->
-      <h1 class="result-heading">Authentic document</h1>
+      <!-- Título Principal Centralizado -->
+      <h1 class="result-heading">Documento autêntico</h1>
 
-      <!-- Section Heading: Left-aligned -->
-      <h2 class="result-section-heading">Document data</h2>
+      <!-- Subtítulo Alinhado à Esquerda -->
+      <h2 class="result-section-heading">Dados do documento</h2>
 
-      <!-- Document Data Fields (Exact match to screenshot) -->
+      <!-- Campos do Documento na Ordem Exata -->
       <div class="document-data-list">
         
-        <!-- Situation / Valid until -->
-        <div class="data-field" id="field-situation">
-          <div class="field-label">Situation:</div>
-          <div class="field-value" id="val-situation">Valid until: June 18, 2028</div>
+        <!-- Situação / Válido até -->
+        <div class="data-field" id="field-situacao">
+          <div class="field-label">Situação:</div>
+          <div class="field-value" id="val-situacao">Válido até: 18 de junho de 2028</div>
         </div>
 
-        <!-- Code -->
-        <div class="data-field" id="field-code">
-          <div class="field-label">Code:</div>
-          <div class="field-value" id="val-code">1da556d388c046ec8d3379e1b5cf772f</div>
+        <!-- Código (Não traduzido automaticamente) -->
+        <div class="data-field" id="field-codigo">
+          <div class="field-label">Código:</div>
+          <div class="field-value notranslate" translate="no" id="val-codigo">1da556d388c046ec8d3379e1b5cf772f</div>
         </div>
 
-        <!-- Name -->
-        <div class="data-field" id="field-name">
-          <div class="field-label">Name:</div>
-          <div class="field-value" id="val-name">SHARIFULLAH</div>
+        <!-- Nome (Não traduzido automaticamente) -->
+        <div class="data-field" id="field-nome">
+          <div class="field-label">Nome:</div>
+          <div class="field-value notranslate" translate="no" id="val-nome">SHARIFULLAH</div>
         </div>
 
-        <!-- Surname -->
-        <div class="data-field" id="field-surname">
-          <div class="field-label">Surname:</div>
-          <div class="field-value" id="val-surname">HAMDARD</div>
+        <!-- Sobrenome (Não traduzido automaticamente) -->
+        <div class="data-field" id="field-sobrenome">
+          <div class="field-label">Sobrenome:</div>
+          <div class="field-value notranslate" translate="no" id="val-sobrenome">HAMDARD</div>
         </div>
 
-        <!-- RNM -->
+        <!-- RNM (Não traduzido automaticamente) -->
         <div class="data-field" id="field-rnm">
           <div class="field-label">RNM:</div>
-          <div class="field-value" id="val-rnm">B269953J</div>
+          <div class="field-value notranslate" translate="no" id="val-rnm">B269953J</div>
         </div>
 
-        <!-- Date of birth -->
-        <div class="data-field" id="field-dob">
-          <div class="field-label">Date of birth:</div>
-          <div class="field-value" id="val-dob">29/02/2004</div>
+        <!-- Data de nascimento (Não traduzido automaticamente) -->
+        <div class="data-field" id="field-nascimento">
+          <div class="field-label">Data de nascimento:</div>
+          <div class="field-value notranslate" translate="no" id="val-nascimento">29/02/2004</div>
         </div>
 
-        <!-- Nationality -->
-        <div class="data-field" id="field-nationality">
-          <div class="field-label">Nationality:</div>
-          <div class="field-value" id="val-nationality">Afghanistan</div>
+        <!-- Nacionalidade (Dado do titular mantido) -->
+        <div class="data-field" id="field-nacionalidade">
+          <div class="field-label">Nacionalidade:</div>
+          <div class="field-value notranslate" translate="no" id="val-nacionalidade">Afghanistan</div>
         </div>
 
       </div>
 
-      <!-- "go back" Control matching reference screenshot -->
+      <!-- Controle de Voltar Centralizado Conforme Referência -->
       <div class="result-actions">
-        <button type="button" id="btn-voltar" class="go-back-btn" aria-label="Go back">
+        <button type="button" id="btn-voltar" class="go-back-btn" aria-label="Voltar à tela inicial">
           <span class="go-back-icon-box" aria-hidden="true">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
           </span>
-          <span class="go-back-label">go back</span>
+          <span class="go-back-label">Voltar</span>
         </button>
       </div>
     </div>
   </main>
 
-  <!-- Not Found View -->
+  <!-- Página de Não Localizado -->
   <main id="notfound-view" class="view-container result-layout hidden">
     <div class="result-card">
       <div class="logo-wrapper result-logo-wrapper">
-        <img src="Logo/logo.jpeg" alt="Logo" class="portal-logo" id="notfound-logo">
+        <img src="Logo/logo.jpeg" alt="Logotipo da Consultoria" class="portal-logo" id="notfound-logo">
       </div>
 
-      <h1 class="result-heading notfound-heading">Document not found</h1>
-      <h2 class="result-section-heading">Search result</h2>
+      <h1 class="result-heading notfound-heading">Documento não localizado</h1>
+      <h2 class="result-section-heading">Resultado da consulta</h2>
 
       <div class="document-data-list">
         <div class="data-field">
-          <div class="field-label">Status:</div>
-          <div class="field-value notfound-text">No matching record found</div>
+          <div class="field-label">Situação:</div>
+          <div class="field-value notfound-text">Não localizado</div>
         </div>
         <div class="data-field">
-          <div class="field-label">Searched code:</div>
-          <div class="field-value font-mono" id="val-missing-code">--</div>
+          <div class="field-label">Código pesquisado:</div>
+          <div class="field-value font-mono notranslate" translate="no" id="val-missing-code">--</div>
         </div>
-        <p class="notfound-info">No document found for the provided verification code. Please check the code and try again.</p>
+        <p class="notfound-info">Nenhum documento foi localizado para o código verificador informado. Por favor, verifique os caracteres e tente novamente.</p>
       </div>
 
       <div class="result-actions">
-        <button type="button" id="btn-voltar-notfound" class="go-back-btn" aria-label="Go back">
+        <button type="button" id="btn-voltar-notfound" class="go-back-btn" aria-label="Voltar à tela inicial">
           <span class="go-back-icon-box" aria-hidden="true">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
           </span>
-          <span class="go-back-label">go back</span>
+          <span class="go-back-label">Voltar</span>
         </button>
       </div>
     </div>
   </main>
 
+  <!-- Rodapé com Aviso de Demonstração Privada -->
+  <footer class="portal-disclaimer">
+    <div class="disclaimer-content">
+      <p>Demonstração de validação de documentos para consultoria privada. Este portal não representa órgão governamental oficial nem reivindica autenticidade legal de Estado.</p>
+    </div>
+  </footer>
+
+  <!-- Script da Aplicação -->
   <script src="script.js"></script>
+
+  <!-- Integração Oficial do Google Translate -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'pt',
+        includedLanguages: 'pt,en,ur,es,fr,ar,fa,ps',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
