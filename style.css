@@ -1,0 +1,401 @@
+/* ==========================================================================
+   Validador de Autenticidade de Documento
+   Exact match to the client's reference screenshots & design
+   ========================================================================== */
+
+/* Reset & Box Sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Visibility Utility */
+.hidden {
+  display: none !important;
+}
+
+/* Base View Layout */
+.view-container {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* --------------------------------------------------------------------------
+   Search Page View (Matches Reference Screenshot Panel 2)
+   -------------------------------------------------------------------------- */
+.search-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7f7f7;
+  padding: 24px 16px;
+}
+
+.search-box {
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Centered Logo */
+.logo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.result-logo-wrapper {
+  margin-bottom: 24px;
+}
+
+.portal-logo {
+  width: 82px;
+  height: auto;
+  max-height: 98px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Portuguese Heading on Search */
+.search-heading {
+  font-size: 19px;
+  font-weight: 700;
+  color: #495057;
+  line-height: 1.3;
+  margin-bottom: 26px;
+  text-align: center;
+  letter-spacing: -0.01em;
+}
+
+/* Verification Form & Input Box */
+.verification-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-group {
+  width: 100%;
+  max-width: 290px;
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  padding: 6px 10px 4px 10px;
+  text-align: left;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-group:focus-within {
+  border-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+.input-group.input-error {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.2);
+}
+
+.floating-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: #6c757d;
+  line-height: 1.2;
+  margin-bottom: 2px;
+  user-select: none;
+}
+
+.codigo-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 400;
+  color: #212529;
+  background: transparent;
+  padding: 2px 0 4px 0;
+}
+
+.codigo-input::placeholder {
+  color: #adb5bd;
+  font-size: 12px;
+}
+
+/* Error message feedback */
+.input-error-msg {
+  width: 100%;
+  max-width: 290px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #dc3545;
+  margin-top: 6px;
+  text-align: left;
+  padding-left: 2px;
+}
+
+/* Action Buttons Side-by-Side */
+.button-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 290px;
+}
+
+.btn {
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+  min-width: 96px;
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: #2196f3;
+  color: #ffffff;
+  border: 1px solid #2196f3;
+}
+
+.btn-primary:hover {
+  background-color: #1976d2;
+  border-color: #1976d2;
+}
+
+.btn-secondary {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  border: 1px solid #ced4da;
+}
+
+.btn-secondary:hover {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+/* --------------------------------------------------------------------------
+   Loading Modal (Matches Reference Video/Screenshots)
+   -------------------------------------------------------------------------- */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.loading-box {
+  background-color: #2d2d2d;
+  color: #ffffff;
+  padding: 24px 38px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-text {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+/* --------------------------------------------------------------------------
+   Result Page View (Exact match to supplied client reference screenshot)
+   Light grey background, centered logo, centered "Authentic document" heading,
+   left-aligned "Document data" and fields, bottom centered "go back" button
+   -------------------------------------------------------------------------- */
+.result-layout {
+  background-color: #e9ecef;
+  padding: 32px 20px 48px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.result-card {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* "Authentic document" Heading: Centered */
+.result-heading {
+  font-size: 23px;
+  font-weight: 700;
+  color: #333333;
+  margin-bottom: 20px;
+  text-align: center;
+  letter-spacing: -0.01em;
+}
+
+/* "Document data" Section Heading: Left-aligned */
+.result-section-heading {
+  font-size: 17px;
+  font-weight: 700;
+  color: #3a3a3a;
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+/* Document Data List */
+.document-data-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.data-field {
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+/* Bold Labels & Regular-weight Values */
+.field-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: #3a3a3a;
+  line-height: 1.3;
+  margin-bottom: 2px;
+  text-align: left;
+}
+
+.field-value {
+  font-size: 14.5px;
+  font-weight: 400;
+  color: #4a4a4a;
+  line-height: 1.35;
+  text-align: left;
+  word-break: break-all;
+}
+
+/* "go back" Control matching reference screenshot */
+.result-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 28px;
+  width: 100%;
+}
+
+.go-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+  user-select: none;
+}
+
+.go-back-btn:hover {
+  opacity: 0.88;
+}
+
+.go-back-btn:active {
+  transform: translateY(1px);
+}
+
+.go-back-icon-box {
+  width: 38px;
+  height: 38px;
+  background-color: #2b70c9;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  flex-shrink: 0;
+}
+
+.go-back-label {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #495057;
+  letter-spacing: -0.01em;
+}
+
+/* Not Found Adjustments */
+.notfound-heading {
+  color: #c92a2a;
+}
+
+.notfound-text {
+  color: #c92a2a;
+  font-weight: 500;
+}
+
+.font-mono {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 13px;
+}
+
+.notfound-info {
+  font-size: 13.5px;
+  color: #555555;
+  margin-top: 10px;
+  line-height: 1.4;
+  text-align: left;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Specific Media Queries
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+  .search-layout {
+    padding: 20px 16px;
+  }
+
+  .result-layout {
+    padding: 24px 16px 40px 16px;
+  }
+
+  .portal-logo {
+    width: 78px;
+  }
+
+  .search-heading {
+    font-size: 18px;
+  }
+
+  .result-heading {
+    font-size: 21px;
+  }
+
+  .field-label {
+    font-size: 14px;
+  }
+
+  .field-value {
+    font-size: 14px;
+  }
+}
