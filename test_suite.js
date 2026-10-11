@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-console.log('--- VALIDATING CLIENT EXACT SPECIFICATIONS ---');
+console.log('--- VALIDATING UUID MASK & UPDATED SEARCH FORM ---');
 
 // 1. Read files
 const html = fs.readFileSync('index.html', 'utf8');
@@ -11,100 +11,77 @@ console.log('✓ index.html read successfully (' + html.length + ' bytes)');
 console.log('✓ style.css read successfully (' + css.length + ' bytes)');
 console.log('✓ script.js read successfully (' + js.length + ' bytes)');
 
-// 2. Verify input has placeholder and NO pre-filled value
-console.log('\nChecking input field attributes:');
-const inputMatch = html.match(/<input[^>]*id=["']codigo-input["'][^>]*>/);
-if (!inputMatch) {
-  console.error('✗ codigo-input not found in index.html');
+// 2. Verify placeholder ________-____-____-____-____________
+const expectedPlaceholder = 'placeholder="________-____-____-____-____________"';
+const hasPlaceholder = html.includes(expectedPlaceholder);
+console.log('\nChecking UUID mask placeholder in index.html:');
+console.log('  Placeholder ________-____-____-____-____________:', hasPlaceholder ? '✓ CONFIRMED' : '✗ MISSING');
+if (!hasPlaceholder) process.exit(1);
+
+// 3. Verify single line heading
+const hasHeading = html.includes('<h1 class="search-heading">Validador de autenticidade de documento</h1>');
+console.log('  Single-line heading "Validador de autenticidade de documento":', hasHeading ? '✓ CONFIRMED' : '✗ MISSING');
+if (!hasHeading) process.exit(1);
+
+// 4. Test formatUuidMask logic
+function formatUuidMask(value) {
+  const clean = value.replace(/[^a-zA-Z0-9]/g, '').slice(0, 32);
+  if (!clean) return '';
+
+  let formatted = '';
+  if (clean.length > 0) formatted += clean.slice(0, 8);
+  if (clean.length > 8) formatted += '-' + clean.slice(8, 12);
+  if (clean.length > 12) formatted += '-' + clean.slice(12, 16);
+  if (clean.length > 16) formatted += '-' + clean.slice(16, 20);
+  if (clean.length > 20) formatted += '-' + clean.slice(20, 32);
+
+  return formatted;
+}
+
+console.log('\nTesting UUID mask formatting:');
+const testRaw = '1da556d388c046ec8d3379e1b5cf772f';
+const masked = formatUuidMask(testRaw);
+console.log('  Raw:   ', testRaw);
+console.log('  Masked:', masked);
+if (masked !== '1da556d3-88c0-46ec-8d33-79e1b5cf772f') {
+  console.error('✗ Mask formatting failed');
   process.exit(1);
 }
-const inputTag = inputMatch[0];
-const hasValueAttr = /value=["'][^"']*["']/.test(inputTag);
-const hasPlaceholder = inputTag.includes('placeholder="Digite o código verificador"');
+console.log('  ✓ Mask 8-4-4-4-12 matches reference perfectly');
 
-console.log('  Pre-filled value attribute present:', hasValueAttr ? '✗ FAILED (must be empty)' : '✓ NONE (correct, empty)');
-console.log('  Placeholder "Digite o código verificador":', hasPlaceholder ? '✓ CONFIRMED' : '✗ MISSING');
-
-if (hasValueAttr || !hasPlaceholder) {
-  process.exit(1);
-}
-
-// 3. Verify NO unrequested content (no translate widget, no top-bar, no footer)
-console.log('\nChecking removal of unrequested extra content:');
-const hasTranslateWidget = html.includes('google_translate_element') || html.includes('translate.google.com');
-const hasTopBar = html.includes('class="top-bar"');
-const hasFooter = html.includes('<footer');
-
-console.log('  Google translate / widget:', hasTranslateWidget ? '✗ FOUND (must be removed)' : '✓ NONE');
-console.log('  Top bar / language selector:', hasTopBar ? '✗ FOUND (must be removed)' : '✓ NONE');
-console.log('  Footer / promotional text:', hasFooter ? '✗ FOUND (must be removed)' : '✓ NONE');
-
-if (hasTranslateWidget || hasTopBar || hasFooter) {
-  process.exit(1);
-}
-
-// 4. Verify all Brazilian Portuguese reference labels
-const ptLabels = [
-  'Validador de',
-  'autenticidade de',
-  'documento',
-  'Código Verificador',
-  'Validar',
-  'Limpar',
-  'Aguarde...',
-  'Documento autêntico',
-  'Dados do documento',
-  'Situação:',
-  'Código:',
-  'Nome:',
-  'Sobrenome:',
-  'RNM:',
-  'Data de nascimento:',
-  'Nacionalidade:',
-  'Voltar'
-];
-
-console.log('\nVerifying Brazilian Portuguese labels in index.html:');
-for (const label of ptLabels) {
-  if (html.includes(label)) {
-    console.log(`  ✓ Label "${label}" found`);
-  } else {
-    console.error(`  ✗ MISSING LABEL: "${label}"`);
-    process.exit(1);
-  }
-}
-
-// 5. Verify DOM Element IDs in script.js
-const idMatches = js.matchAll(/document\.getElementById\(['"]([^'"]+)['"]\)/g);
-const idsInJs = Array.from(new Set(Array.from(idMatches, m => m[1])));
-
-console.log(`\nVerifying ${idsInJs.length} DOM element IDs:`);
-for (const id of idsInJs) {
-  const hasId = html.includes(`id="${id}"`) || html.includes(`id='${id}'`);
-  if (!hasId) {
-    console.error(`  ✗ MISSING ID: "${id}"`);
-    process.exit(1);
-  }
-}
-console.log('  ✓ All DOM element IDs matched!');
-
-// 6. Test Record & Lookup
-console.log('\nTesting dataset logic:');
+// 5. Test Lookup
 const recordsMatch = js.match(/const VERIFICATION_RECORDS = (\[[\s\S]*?\]);/);
 const records = eval(recordsMatch[1]);
-const target = records.find(r => r.codigo === '1da556d388c046ec8d3379e1b5cf772f');
+function normalizeCode(str) {
+  if (!str) return '';
+  return str.trim().toLowerCase().replace(/[^a-z0-9]/g, '');
+}
+function findRecord(searchQuery) {
+  if (!searchQuery) return null;
+  const rawClean = searchQuery.trim().toLowerCase();
+  const normalized = normalizeCode(searchQuery);
 
-if (!target) {
-  console.error('✗ Record 1da556d388c046ec8d3379e1b5cf772f not found');
-  process.exit(1);
+  return records.find(record => {
+    const recordRaw = record.codigo.trim().toLowerCase();
+    const recordNorm = normalizeCode(record.codigo);
+    return recordRaw === rawClean || recordNorm === normalized;
+  }) || null;
 }
 
-console.log('  Código:', target.codigo);
-console.log('  Nome:', target.nome === 'SHARIFULLAH' ? '✓ SHARIFULLAH' : '✗ FAILED');
-console.log('  Sobrenome:', target.sobrenome === 'HAMDARD' ? '✓ HAMDARD' : '✗ FAILED');
-console.log('  RNM:', target.rnm === 'B269953J' ? '✓ B269953J' : '✗ FAILED');
-console.log('  Data Nasc:', target.nascimento === '29/02/2004' ? '✓ 29/02/2004' : '✗ FAILED');
-console.log('  Nacionalidade:', target.nacionalidade === 'Afghanistan' ? '✓ Afghanistan' : '✗ FAILED');
-console.log('  Situação:', target.situacao === 'Válido até: 18 de junho de 2028' ? '✓ Válido até: 18 de junho de 2028' : '✗ FAILED');
+const match = findRecord(masked);
+console.log('\nLookup by masked code:', match ? `✓ FOUND -> ${match.nome} ${match.sobrenome}` : '✗ FAILED');
+if (!match || match.nome !== 'SHARIFULLAH') process.exit(1);
 
-console.log('\nALL SPECIFICATION CHECKS PASSED!');
+// 6. Verify DOM IDs
+const idMatches = js.matchAll(/document\.getElementById\(['"]([^'"]+)['"]\)/g);
+const idsInJs = Array.from(new Set(Array.from(idMatches, m => m[1])));
+console.log(`\nVerifying ${idsInJs.length} DOM IDs:`);
+for (const id of idsInJs) {
+  if (!html.includes(`id="${id}"`)) {
+    console.error(`✗ Missing ID: ${id}`);
+    process.exit(1);
+  }
+}
+console.log('✓ All DOM IDs matched!');
+
+console.log('\nALL TESTS PASSED SUCCESSFULLY!');

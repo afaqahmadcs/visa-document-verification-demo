@@ -1,6 +1,6 @@
 /**
  * Validador de Autenticidade de Documento
- * Português do Brasil (pt-BR) - Fluxo de Validação
+ * Português do Brasil (pt-BR) - Formatação com Máscara UUID
  */
 
 'use strict';
@@ -54,11 +54,29 @@ const btnVoltar = document.getElementById('btn-voltar');
 const btnVoltarNotFound = document.getElementById('btn-voltar-notfound');
 
 /* ==========================================================================
-   Funções de Normalização e Busca
+   Funções de Máscara e Normalização
    ========================================================================== */
 
 /**
- * Normaliza o código eliminando espaços e hífens para comparação segura
+ * Formata os caracteres digitados no padrão UUID 8-4-4-4-12
+ */
+function formatUuidMask(value) {
+  // Mantém apenas caracteres alfanuméricos hexadecimais
+  const clean = value.replace(/[^a-zA-Z0-9]/g, '').slice(0, 32);
+  if (!clean) return '';
+
+  let formatted = '';
+  if (clean.length > 0) formatted += clean.slice(0, 8);
+  if (clean.length > 8) formatted += '-' + clean.slice(8, 12);
+  if (clean.length > 12) formatted += '-' + clean.slice(12, 16);
+  if (clean.length > 16) formatted += '-' + clean.slice(16, 20);
+  if (clean.length > 20) formatted += '-' + clean.slice(20, 32);
+
+  return formatted;
+}
+
+/**
+ * Normaliza o código eliminando espaços e hífens para busca
  */
 function normalizeCode(str) {
   if (!str) return '';
@@ -153,7 +171,7 @@ function verifyDocument(codeToVerify) {
   const code = (codeToVerify !== undefined ? codeToVerify : (input ? input.value : '')).trim();
 
   // Validação de campo vazio
-  if (!code) {
+  if (!code || normalizeCode(code).length === 0) {
     showError('Por favor, informe o código verificador.');
     return;
   }
@@ -203,10 +221,19 @@ if (form) {
   });
 }
 
-// Digitação no campo de entrada
+// Aplicação de máscara em tempo real
 if (input) {
-  input.addEventListener('input', () => {
+  input.addEventListener('input', (e) => {
     clearError();
+    const formatted = formatUuidMask(input.value);
+    input.value = formatted;
+  });
+
+  input.addEventListener('paste', (e) => {
+    // Permite colar normalmente e formata no próximo frame
+    setTimeout(() => {
+      input.value = formatUuidMask(input.value);
+    }, 0);
   });
 }
 
@@ -230,10 +257,10 @@ if (btnVoltarNotFound) {
   btnVoltarNotFound.addEventListener('click', goBackToSearch);
 }
 
-// Inicialização: O campo permanece completamente vazio ao carregar a página
+// Inicialização: O campo permanece vazio no carregamento
 window.addEventListener('DOMContentLoaded', () => {
   if (input) {
-    input.value = ''; // Garante campo vazio no carregamento
+    input.value = '';
     input.focus();
   }
 });
