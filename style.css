@@ -94,8 +94,8 @@ html, body {
   max-width: 290px;
   background-color: #ffffff;
   border: 1px solid #ced4da;
-  border-radius: 4px;
-  padding: 6px 10px 4px 10px;
+  border-radius: 5px;
+  padding: 8px 12px 6px 12px;
   text-align: left;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
@@ -112,11 +112,11 @@ html, body {
 
 .floating-label {
   display: block;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 500;
-  color: #6c757d;
-  line-height: 1.2;
-  margin-bottom: 2px;
+  color: #4a5568;
+  line-height: 1.25;
+  margin-bottom: 4px;
   user-select: none;
 }
 
@@ -125,16 +125,17 @@ html, body {
   border: none;
   outline: none;
   font-family: inherit;
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 400;
-  color: #212529;
+  color: #718096;
   background: transparent;
-  padding: 2px 0 4px 0;
+  padding: 0;
+  letter-spacing: -0.01em;
 }
 
 .codigo-input::placeholder {
   color: #adb5bd;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 /* Error message feedback */
