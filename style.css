@@ -1,6 +1,7 @@
 /* ==========================================================================
    Validador de Autenticidade de Documento
    Português do Brasil (pt-BR) - Estilos Fiéis à Referência
+   Design Responsivo e Tipografia Otimizada
    ========================================================================== */
 
 /* Reset & Box Sizing */
@@ -29,23 +30,24 @@ html, body {
 .view-container {
   width: 100%;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 /* --------------------------------------------------------------------------
    Página de Pesquisa (Fiel à Imagem Enviada)
    -------------------------------------------------------------------------- */
 .search-layout {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   background-color: #f7f7f7;
-  padding: 32px 16px;
+  padding: 28px 14px;
 }
 
 .search-box {
   width: 100%;
-  max-width: 600px;
+  max-width: 580px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,30 +59,31 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 22px;
+  margin-bottom: 20px;
 }
 
 .result-logo-wrapper {
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .portal-logo {
-  width: 82px;
+  width: 78px;
   height: auto;
-  max-height: 98px;
+  max-height: 92px;
   object-fit: contain;
   display: block;
 }
 
-/* Título Centralizado em Linha Única Conforme Imagem */
+/* Título Centralizado - Tamanho Proporcional e Responsivo */
 .search-heading {
-  font-size: 25px;
+  font-size: clamp(18px, 4vw, 21.5px);
   font-weight: 700;
   color: #555555;
   line-height: 1.3;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   text-align: center;
   letter-spacing: -0.01em;
+  padding: 0 8px;
 }
 
 /* Formulário de Validação */
@@ -91,16 +94,18 @@ html, body {
   align-items: center;
 }
 
-/* Campo de Entrada com Borda Azul e Layout Amplo */
+/* Campo de Entrada com Borda Azul e Layout Amplo Responsivo */
 .input-group {
   width: 100%;
-  max-width: 580px;
+  max-width: 540px;
   background-color: #ffffff;
   border: 1px solid #70b0ea;
   border-radius: 4px;
-  padding: 8px 12px 10px 12px;
+  padding: 7px 12px 8px 12px;
   text-align: left;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .input-group:focus-within {
@@ -115,11 +120,11 @@ html, body {
 
 .floating-label {
   display: block;
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 600;
   color: #495057;
   line-height: 1.2;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
   user-select: none;
 }
 
@@ -127,30 +132,31 @@ html, body {
   width: 100%;
   border: none;
   outline: none;
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace, sans-serif;
-  font-size: 15px;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: clamp(11.5px, 2.9vw, 13.5px);
   font-weight: 500;
   color: #212529;
   background: transparent;
   padding: 0;
-  letter-spacing: 0.5px;
+  letter-spacing: clamp(0.2px, 0.35vw, 0.4px);
+  box-sizing: border-box;
 }
 
 .codigo-input::placeholder {
-  color: #495057;
-  font-size: 15px;
-  letter-spacing: 0.5px;
-  opacity: 0.75;
+  color: #64748b;
+  font-size: clamp(11.5px, 2.9vw, 13.5px);
+  letter-spacing: clamp(0.2px, 0.35vw, 0.4px);
+  opacity: 0.8;
 }
 
 /* Mensagem de Erro de Validação */
 .input-error-msg {
   width: 100%;
-  max-width: 580px;
-  font-size: 12.5px;
+  max-width: 540px;
+  font-size: 12px;
   font-weight: 500;
   color: #dc3545;
-  margin-top: 8px;
+  margin-top: 6px;
   text-align: left;
   padding-left: 2px;
 }
@@ -161,21 +167,21 @@ html, body {
   justify-content: center;
   align-items: center;
   gap: 12px;
-  margin-top: 18px;
+  margin-top: 16px;
   width: 100%;
-  max-width: 580px;
+  max-width: 540px;
 }
 
 .btn {
   font-family: inherit;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 500;
-  padding: 7px 22px;
+  padding: 7px 20px;
   border-radius: 4px;
   cursor: pointer;
   outline: none;
   transition: background-color 0.15s ease, opacity 0.15s ease;
-  min-width: 86px;
+  min-width: 84px;
   text-align: center;
 }
 
@@ -217,7 +223,7 @@ html, body {
 .loading-box {
   background-color: #2d2d2d;
   color: #ffffff;
-  padding: 24px 38px;
+  padding: 22px 36px;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
   display: flex;
@@ -226,7 +232,7 @@ html, body {
 }
 
 .loading-text {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.01em;
 }
@@ -236,35 +242,32 @@ html, body {
    -------------------------------------------------------------------------- */
 .result-layout {
   background-color: #e9ecef;
-  padding: 32px 20px 48px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 28px 16px 40px;
 }
 
 .result-card {
   width: 100%;
-  max-width: 380px;
+  max-width: 370px;
   display: flex;
   flex-direction: column;
 }
 
 /* "Documento autêntico" Centralizado */
 .result-heading {
-  font-size: 23px;
+  font-size: clamp(18px, 4vw, 20.5px);
   font-weight: 700;
   color: #333333;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   text-align: center;
   letter-spacing: -0.01em;
 }
 
 /* "Dados do documento" Alinhado à Esquerda */
 .result-section-heading {
-  font-size: 17px;
+  font-size: 15.5px;
   font-weight: 700;
   color: #3a3a3a;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
   text-align: left;
 }
 
@@ -276,13 +279,13 @@ html, body {
 }
 
 .data-field {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   text-align: left;
 }
 
 /* Rótulos em Negrito & Valores com Peso Normal */
 .field-label {
-  font-size: 15px;
+  font-size: 13.5px;
   font-weight: 700;
   color: #3a3a3a;
   line-height: 1.3;
@@ -291,12 +294,13 @@ html, body {
 }
 
 .field-value {
-  font-size: 14.5px;
+  font-size: 13.5px;
   font-weight: 400;
   color: #4a4a4a;
   line-height: 1.35;
   text-align: left;
   word-break: break-all;
+  overflow-wrap: anywhere;
 }
 
 /* Botão Voltar Conforme Referência */
@@ -304,7 +308,7 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 28px;
+  margin-top: 24px;
   width: 100%;
 }
 
@@ -330,10 +334,10 @@ html, body {
 }
 
 .go-back-icon-box {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   background-color: #2b70c9;
-  border-radius: 9px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -342,7 +346,7 @@ html, body {
 }
 
 .go-back-label {
-  font-size: 14.5px;
+  font-size: 14px;
   font-weight: 500;
   color: #495057;
   letter-spacing: -0.01em;
@@ -359,12 +363,12 @@ html, body {
 }
 
 .font-mono {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 13px;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", Courier, monospace;
+  font-size: 12.5px;
 }
 
 .notfound-info {
-  font-size: 13.5px;
+  font-size: 13px;
   color: #555555;
   margin-top: 10px;
   line-height: 1.4;
@@ -372,45 +376,48 @@ html, body {
 }
 
 /* --------------------------------------------------------------------------
-   Responsividade Mobile
+   Responsividade Mobile Avançada
    -------------------------------------------------------------------------- */
-@media (max-width: 620px) {
-  .search-heading {
-    font-size: 21px;
-    white-space: normal;
+@media (max-width: 640px) {
+  .search-layout {
+    padding: 20px 12px;
+  }
+
+  .search-box {
+    max-width: 100%;
   }
 
   .input-group {
     max-width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  .search-layout {
-    padding: 24px 16px 36px;
-  }
-
-  .result-layout {
-    padding: 24px 16px 40px;
+    padding: 6px 10px 8px 10px;
   }
 
   .portal-logo {
-    width: 78px;
+    width: 72px;
   }
+}
 
+@media (max-width: 380px) {
   .search-heading {
-    font-size: 19px;
+    font-size: 17px;
   }
 
   .result-heading {
-    font-size: 21px;
+    font-size: 18px;
   }
 
-  .field-label {
-    font-size: 14px;
+  .field-label, .field-value {
+    font-size: 12.5px;
   }
 
-  .field-value {
-    font-size: 14px;
+  .btn {
+    padding: 6px 16px;
+    font-size: 13px;
+    min-width: 76px;
+  }
+
+  .go-back-icon-box {
+    width: 32px;
+    height: 32px;
   }
 }
