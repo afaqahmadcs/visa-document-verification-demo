@@ -37,23 +37,32 @@ node test_suite.js
 
 ---
 
-## 📌 Especificações e Fluxo
+## 📌 Especificações e Fluxo Responsivo (Mobile & PC/Laptop)
 
-1. **Página de Pesquisa (Layout Mobile):**
-   - Brasão oficial centralizado (`Logo/logo.jpeg`).
-   - Título em duas linhas: `Validador de autenticidade`<br>`de documento`.
-   - Campo de entrada com rótulo `Código Verificador` e máscara `________-____-____-____-____________`.
-   - O campo inicia vazio e formata automaticamente com hífens (8-4-4-4-12) conforme a digitação.
+1. **Página de Pesquisa:**
+   - **Mobile:**
+     - Título dividido em duas linhas conforme referência mobile: `Validador de autenticidade`<br>`de documento`.
+     - Campo de busca compacto (284px de largura).
+   - **PC / Laptop:**
+     - Título fluido em linha única centralizado: `Validador de autenticidade de documento`.
+     - Campo de busca largo (620px de largura) com foco em azul suave (`#4ba3e3`).
+   - Máscara UUID automática em tempo real (8-4-4-4-12): `________-____-____-____-____________`.
    - Botões centralizados lado a lado: `Validar` (azul) e `Limpar` (cinza claro).
-   - Se o campo estiver vazio ao clicar em **Validar**, exibe mensagem: `Por favor, informe o código verificador.`
-   - O botão **Limpar** limpa o campo de entrada e devolve o foco.
+   - Validação imediata: Alerta se o campo estiver vazio ao clicar em **Validar**.
+
 2. **Modal de Carregamento:**
-   - Caixa escura com texto `Aguarde...` conforme referência.
-3. **Página de Resultado:**
-   - Fundo idêntico à referência mobile.
-   - Título centralizado: `Documento autêntico`.
-   - Subtítulo alinhado à esquerda: `Dados do documento`.
-   - Campos com rótulos e valores alinhados à esquerda (incluindo `Situacao: Valido até: 17/08/2025`).
-   - Botão cinza claro centralizado: `Voltar`.
+   - Caixa escura com texto `Aguarde...` com temporização realista (~600ms).
+
+3. **Página de Resultado do Documento:**
+   - **Mobile:**
+     - Layout vertical compacto (284px) com rótulo acima e valor abaixo em cada linha.
+     - Botão `Voltar` cinza claro centralizado.
+   - **PC / Laptop:**
+     - Brasão e título principal (`Documento autêntico`) centralizados no topo.
+     - Subtítulo `Dados do documento` alinhado à esquerda.
+     - Grade horizontal em duas colunas: Coluna de rótulos à esquerda (em negrito) e coluna de valores à direita.
+     - Botão `Voltar` cinza claro centralizado na parte inferior da tela.
+
 4. **Sem Conteúdo Adicional:**
-   - Sem cabeçalhos ou rodapés desnecessários, sem seletores de idioma ou widgets de tradução.
+   - Sem cabeçalhos supérfluos, rodapés ou widgets de tradução de terceiros.
+

@@ -1,6 +1,6 @@
 /* ==========================================================================
    Validador de Autenticidade de Documento
-   Português do Brasil (pt-BR) - Estilos Fiéis à Referência Mobile
+   Português do Brasil (pt-BR) - Estilos Fiéis para Mobile e PC / Desktop
    ========================================================================== */
 
 /* Reset & Box Sizing */
@@ -36,9 +36,9 @@ html, body {
   box-sizing: border-box;
 }
 
-/* --------------------------------------------------------------------------
-   Página de Pesquisa (Fiel às Imagens 1 e 2 do Mobile)
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   Página de Pesquisa (Padrão Mobile - max-width: 284px)
+   ========================================================================== */
 .search-layout {
   background-color: #fafafa;
   padding: 46px 16px 60px 16px;
@@ -59,10 +59,12 @@ html, body {
   justify-content: center;
   align-items: center;
   margin-bottom: 16px;
+  width: 100%;
 }
 
 .result-logo-wrapper {
   margin-bottom: 16px;
+  width: 100%;
 }
 
 .portal-logo {
@@ -73,7 +75,7 @@ html, body {
   display: block;
 }
 
-/* Título em Duas Linhas Conforme Imagem */
+/* Título de Pesquisa */
 .search-heading {
   font-size: 20px;
   font-weight: 600;
@@ -84,6 +86,10 @@ html, body {
   letter-spacing: -0.01em;
 }
 
+.search-heading br {
+  display: inline;
+}
+
 /* Formulário de Validação */
 .verification-form {
   width: 100%;
@@ -92,7 +98,7 @@ html, body {
   align-items: center;
 }
 
-/* Campo de Entrada com Largura Fiel às Capturas (284px) */
+/* Campo de Entrada */
 .input-group {
   width: 100%;
   max-width: 284px;
@@ -199,9 +205,9 @@ html, body {
   color: #333333;
 }
 
-/* --------------------------------------------------------------------------
+/* ==========================================================================
    Modal de Carregamento ("Aguarde...")
-   -------------------------------------------------------------------------- */
+   ========================================================================== */
 .loading-overlay {
   position: fixed;
   inset: 0;
@@ -229,9 +235,9 @@ html, body {
   letter-spacing: 0.01em;
 }
 
-/* --------------------------------------------------------------------------
-   Página de Resultado do Documento (Fiel à Imagem 3 do Mobile)
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   Página de Resultado do Documento (Padrão Mobile - max-width: 284px)
+   ========================================================================== */
 .result-layout {
   background-color: #fafafa;
   padding: 40px 16px 60px 16px;
@@ -252,6 +258,7 @@ html, body {
   margin-bottom: 18px;
   text-align: center;
   letter-spacing: -0.01em;
+  width: 100%;
 }
 
 /* "Dados do documento" Alinhado à Esquerda */
@@ -295,7 +302,7 @@ html, body {
   overflow-wrap: anywhere;
 }
 
-/* Botão Voltar Centralizado Conforme Imagem 3 */
+/* Botão Voltar Centralizado */
 .result-actions {
   display: flex;
   justify-content: center;
@@ -342,4 +349,157 @@ html, body {
   margin-top: 10px;
   line-height: 1.4;
   text-align: left;
+}
+
+/* ==========================================================================
+   Modo Desktop / Laptop (Fiel às Capturas de Tela do PC)
+   ========================================================================== */
+@media (min-width: 641px) {
+  /* Layout de Pesquisa no PC */
+  .search-layout {
+    padding: 70px 24px 90px 24px;
+  }
+
+  .search-box {
+    max-width: 620px;
+  }
+
+  .logo-wrapper {
+    margin-bottom: 22px;
+  }
+
+  .portal-logo {
+    width: 76px;
+    max-height: 94px;
+  }
+
+  /* Título em uma única linha no PC */
+  .search-heading {
+    font-size: 25px;
+    font-weight: 600;
+    color: #4a4a4a;
+    line-height: 1.25;
+    margin-bottom: 24px;
+    white-space: normal;
+  }
+
+  .search-heading br {
+    display: none;
+  }
+
+  /* Campo de busca largo no PC */
+  .input-group {
+    max-width: 620px;
+    padding: 6px 12px 8px 12px;
+    border-radius: 4px;
+  }
+
+  .floating-label {
+    font-size: 11.5px;
+    margin-bottom: 4px;
+  }
+
+  .codigo-input {
+    font-size: 14px;
+    letter-spacing: 0.2px;
+  }
+
+  .codigo-input::placeholder {
+    font-size: 14px;
+    letter-spacing: 0.2px;
+  }
+
+  .input-error-msg {
+    max-width: 620px;
+    font-size: 12.5px;
+  }
+
+  .button-group {
+    max-width: 620px;
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 8px 24px;
+    min-width: 90px;
+  }
+
+  /* Layout do Resultado no PC (Fiel à Imagem 3 do PC) */
+  .result-layout {
+    padding: 60px 60px 90px 60px;
+    align-items: stretch;
+  }
+
+  .result-card {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+  }
+
+  .result-logo-wrapper {
+    margin-bottom: 22px;
+    justify-content: center;
+  }
+
+  .result-heading {
+    font-size: 26px;
+    font-weight: 600;
+    color: #4a4a4a;
+    margin-bottom: 38px;
+    text-align: center;
+  }
+
+  .result-section-heading {
+    font-size: 18px;
+    font-weight: 700;
+    color: #4a4a4a;
+    margin-bottom: 24px;
+    text-align: left;
+  }
+
+  .document-data-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  /* Cada campo em linha horizontal: Rótulo à esquerda, Valor à direita */
+  .data-field {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin-bottom: 0;
+    text-align: left;
+  }
+
+  .field-label {
+    width: 220px;
+    min-width: 200px;
+    flex-shrink: 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: #4a4a4a;
+    margin-bottom: 0;
+  }
+
+  .field-value {
+    font-size: 14px;
+    font-weight: 400;
+    color: #555555;
+    line-height: 1.4;
+  }
+
+  .result-actions {
+    margin-top: 48px;
+    justify-content: center;
+  }
+
+  .btn-voltar-simple {
+    padding: 9px 40px;
+    font-size: 14px;
+  }
 }
