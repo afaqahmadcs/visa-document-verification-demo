@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-console.log('--- VALIDATING BRAZILIAN PORTUGUESE (pt-BR) & TRANSLATION SUITE ---');
+console.log('--- VALIDATING CLIENT EXACT SPECIFICATIONS ---');
 
 // 1. Read files
 const html = fs.readFileSync('index.html', 'utf8');
@@ -11,13 +11,39 @@ console.log('✓ index.html read successfully (' + html.length + ' bytes)');
 console.log('✓ style.css read successfully (' + css.length + ' bytes)');
 console.log('✓ script.js read successfully (' + js.length + ' bytes)');
 
-// 2. Check HTML lang="pt-BR"
-const hasPtBrLang = /<html[^>]*lang=["']pt-BR["']/i.test(html);
-console.log('\nChecking HTML language attribute:');
-console.log('  lang="pt-BR":', hasPtBrLang ? '✓ CONFIRMED' : '✗ FAILED');
-if (!hasPtBrLang) process.exit(1);
+// 2. Verify input has placeholder and NO pre-filled value
+console.log('\nChecking input field attributes:');
+const inputMatch = html.match(/<input[^>]*id=["']codigo-input["'][^>]*>/);
+if (!inputMatch) {
+  console.error('✗ codigo-input not found in index.html');
+  process.exit(1);
+}
+const inputTag = inputMatch[0];
+const hasValueAttr = /value=["'][^"']*["']/.test(inputTag);
+const hasPlaceholder = inputTag.includes('placeholder="Digite o código verificador"');
 
-// 3. Verify all Brazilian Portuguese reference labels
+console.log('  Pre-filled value attribute present:', hasValueAttr ? '✗ FAILED (must be empty)' : '✓ NONE (correct, empty)');
+console.log('  Placeholder "Digite o código verificador":', hasPlaceholder ? '✓ CONFIRMED' : '✗ MISSING');
+
+if (hasValueAttr || !hasPlaceholder) {
+  process.exit(1);
+}
+
+// 3. Verify NO unrequested content (no translate widget, no top-bar, no footer)
+console.log('\nChecking removal of unrequested extra content:');
+const hasTranslateWidget = html.includes('google_translate_element') || html.includes('translate.google.com');
+const hasTopBar = html.includes('class="top-bar"');
+const hasFooter = html.includes('<footer');
+
+console.log('  Google translate / widget:', hasTranslateWidget ? '✗ FOUND (must be removed)' : '✓ NONE');
+console.log('  Top bar / language selector:', hasTopBar ? '✗ FOUND (must be removed)' : '✓ NONE');
+console.log('  Footer / promotional text:', hasFooter ? '✗ FOUND (must be removed)' : '✓ NONE');
+
+if (hasTranslateWidget || hasTopBar || hasFooter) {
+  process.exit(1);
+}
+
+// 4. Verify all Brazilian Portuguese reference labels
 const ptLabels = [
   'Validador de',
   'autenticidade de',
@@ -48,38 +74,11 @@ for (const label of ptLabels) {
   }
 }
 
-// 4. Verify Google Translate integration
-console.log('\nVerifying Google Translate integration:');
-const hasTranslateBox = html.includes('id="google_translate_element"');
-const hasTranslateScript = html.includes('translate.google.com');
-const hasUrduOption = html.includes('data-lang="ur"');
-const hasEnglishOption = html.includes('data-lang="en"');
-const hasPtOption = html.includes('data-lang="pt"');
-
-console.log('  google_translate_element:', hasTranslateBox ? '✓ PRESENT' : '✗ MISSING');
-console.log('  Google Translate script:', hasTranslateScript ? '✓ PRESENT' : '✗ MISSING');
-console.log('  Urdu (اردو) selector:', hasUrduOption ? '✓ PRESENT' : '✗ MISSING');
-console.log('  English selector:', hasEnglishOption ? '✓ PRESENT' : '✗ MISSING');
-console.log('  Português selector:', hasPtOption ? '✓ PRESENT' : '✗ MISSING');
-
-if (!hasTranslateBox || !hasTranslateScript || !hasUrduOption || !hasEnglishOption) {
-  process.exit(1);
-}
-
-// 5. Verify personal data protection (notranslate / translate="no")
-console.log('\nVerifying personal data preservation tags (notranslate):');
-const notranslateCount = (html.match(/notranslate/g) || []).length;
-console.log(`  Found ${notranslateCount} instances of notranslate class`);
-if (notranslateCount < 6) {
-  console.error('✗ Personal data fields must include notranslate class');
-  process.exit(1);
-}
-
-// 6. Verify DOM Element IDs
+// 5. Verify DOM Element IDs in script.js
 const idMatches = js.matchAll(/document\.getElementById\(['"]([^'"]+)['"]\)/g);
 const idsInJs = Array.from(new Set(Array.from(idMatches, m => m[1])));
 
-console.log(`\nVerifying ${idsInJs.length} DOM element IDs referenced in script.js:`);
+console.log(`\nVerifying ${idsInJs.length} DOM element IDs:`);
 for (const id of idsInJs) {
   const hasId = html.includes(`id="${id}"`) || html.includes(`id='${id}'`);
   if (!hasId) {
@@ -89,8 +88,8 @@ for (const id of idsInJs) {
 }
 console.log('  ✓ All DOM element IDs matched!');
 
-// 7. Verify Record in script.js
-console.log('\nVerifying document record:');
+// 6. Test Record & Lookup
+console.log('\nTesting dataset logic:');
 const recordsMatch = js.match(/const VERIFICATION_RECORDS = (\[[\s\S]*?\]);/);
 const records = eval(recordsMatch[1]);
 const target = records.find(r => r.codigo === '1da556d388c046ec8d3379e1b5cf772f');
@@ -108,4 +107,4 @@ console.log('  Data Nasc:', target.nascimento === '29/02/2004' ? '✓ 29/02/2004
 console.log('  Nacionalidade:', target.nacionalidade === 'Afghanistan' ? '✓ Afghanistan' : '✗ FAILED');
 console.log('  Situação:', target.situacao === 'Válido até: 18 de junho de 2028' ? '✓ Válido até: 18 de junho de 2028' : '✗ FAILED');
 
-console.log('\nALL pt-BR & TRANSLATION CHECKS PASSED SUCCESSFULLY!');
+console.log('\nALL SPECIFICATION CHECKS PASSED!');

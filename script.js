@@ -1,13 +1,12 @@
 /**
  * Validador de Autenticidade de Documento
- * Português do Brasil (pt-BR) com Suporte ao Google Translate
+ * Português do Brasil (pt-BR) - Fluxo de Validação
  */
 
 'use strict';
 
 /* ==========================================================================
    Base de Dados de Validação de Documentos
-   Dados estritamente fiéis ao registro solicitado pelo cliente
    ========================================================================== */
 const VERIFICATION_RECORDS = [
   {
@@ -38,7 +37,7 @@ const inputError = document.getElementById('input-error');
 const btnValidar = document.getElementById('btn-validar');
 const btnLimpar = document.getElementById('btn-limpar');
 
-// Campos do Resultado (Ordem estrita da referência)
+// Campos do Resultado
 const valSituacao = document.getElementById('val-situacao');
 const valCodigo = document.getElementById('val-codigo');
 const valNome = document.getElementById('val-nome');
@@ -54,9 +53,6 @@ const valMissingCode = document.getElementById('val-missing-code');
 const btnVoltar = document.getElementById('btn-voltar');
 const btnVoltarNotFound = document.getElementById('btn-voltar-notfound');
 
-// Botões de Troca de Idioma Rápida
-const quickLangButtons = document.querySelectorAll('.lang-btn');
-
 /* ==========================================================================
    Funções de Normalização e Busca
    ========================================================================== */
@@ -70,7 +66,7 @@ function normalizeCode(str) {
 }
 
 /**
- * Localiza o registro correspondente no repositório local
+ * Localiza o registro correspondente no repositório
  */
 function findRecord(searchQuery) {
   if (!searchQuery) return null;
@@ -85,7 +81,7 @@ function findRecord(searchQuery) {
 }
 
 /**
- * Exibe mensagem de erro de validação
+ * Exibe mensagem de erro de validação em português
  */
 function showError(message) {
   if (inputError) {
@@ -151,7 +147,7 @@ function renderNotFound(enteredCode) {
 }
 
 /**
- * Executa a verificação com animação realista "Aguarde..."
+ * Executa a verificação com modal de carregamento "Aguarde..."
  */
 function verifyDocument(codeToVerify) {
   const code = (codeToVerify !== undefined ? codeToVerify : (input ? input.value : '')).trim();
@@ -196,41 +192,6 @@ function goBackToSearch() {
 }
 
 /* ==========================================================================
-   Suporte de Tradução (Google Translate)
-   ========================================================================== */
-
-/**
- * Altera idioma utilizando a API e componentes do Google Translate
- */
-function setGoogleLanguage(targetLang) {
-  // Atualiza classe ativa dos botões rápidos
-  quickLangButtons.forEach(btn => {
-    if (btn.getAttribute('data-lang') === targetLang) {
-      btn.classList.add('active');
-    } else {
-      btn.classList.remove('active');
-    }
-  });
-
-  // Tenta alterar diretamente o seletor nativo do Google Translate
-  const select = document.querySelector('.goog-te-combo');
-  if (select) {
-    select.value = targetLang;
-    select.dispatchEvent(new Event('change'));
-  } else {
-    // Abordagem via cookie do Google Translate caso o seletor ainda não tenha carregado
-    if (targetLang === 'pt') {
-      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + window.location.hostname;
-    } else {
-      document.cookie = 'googtrans=/pt/' + targetLang + '; path=/;';
-      document.cookie = 'googtrans=/pt/' + targetLang + '; path=/; domain=' + window.location.hostname;
-    }
-    window.location.reload();
-  }
-}
-
-/* ==========================================================================
    Ouvintes de Eventos
    ========================================================================== */
 
@@ -269,25 +230,10 @@ if (btnVoltarNotFound) {
   btnVoltarNotFound.addEventListener('click', goBackToSearch);
 }
 
-// Botões rápidos de idioma (Português, English, اردو)
-quickLangButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const lang = btn.getAttribute('data-lang');
-    if (lang) {
-      setGoogleLanguage(lang);
-    }
-  });
-});
-
-// Inicialização com suporte a parâmetros de URL (?codigo=...)
+// Inicialização: O campo permanece completamente vazio ao carregar a página
 window.addEventListener('DOMContentLoaded', () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const codeParam = urlParams.get('codigo') || urlParams.get('code') || urlParams.get('ref');
-  
-  if (codeParam) {
-    if (input) input.value = codeParam;
-    verifyDocument(codeParam);
-  } else if (input) {
+  if (input) {
+    input.value = ''; // Garante campo vazio no carregamento
     input.focus();
   }
 });
