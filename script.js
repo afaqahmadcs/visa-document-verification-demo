@@ -11,12 +11,12 @@
 const VERIFICATION_RECORDS = [
   {
     codigo: '1da556d388c046ec8d3379e1b5cf772f',
-    situacao: 'Valido até: 17/08/2025',
-    nome: 'MOHAMMAD HAKIM',
-    sobrenome: 'WAZIRI',
-    rnm: 'F907916R',
-    nascimento: '01/05/1987',
-    nacionalidade: 'Afeganistão'
+    situacao: 'Válido até: 18 de junho de 2028',
+    nome: 'SHARIFULLAH',
+    sobrenome: 'HAMDARD',
+    rnm: 'B269953J',
+    nascimento: '29/02/2004',
+    nacionalidade: 'Afghanistan'
   }
 ];
 
@@ -90,11 +90,6 @@ function findRecord(searchQuery) {
   if (!searchQuery) return null;
   const rawClean = searchQuery.trim().toLowerCase();
   const normalized = normalizeCode(searchQuery);
-
-  // Reconhece o código principal e o código alternativo visto na captura do PC
-  if (normalized === '1da556d388c046ec8d3379e1b5cf772f' || normalized === 'a8bb10d34a384693bb9babcf3e3cc4da') {
-    return VERIFICATION_RECORDS[0];
-  }
 
   return VERIFICATION_RECORDS.find(record => {
     const recordRaw = record.codigo.trim().toLowerCase();

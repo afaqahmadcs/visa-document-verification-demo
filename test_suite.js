@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-console.log('--- VALIDATING MOBILE & PC RESPONSIVE VERIFICATION PORTAL ---');
+console.log('--- VALIDATING CLIENT MANDATORY DATA (SHARIFULLAH HAMDARD) & RESPONSIVE PORTAL ---');
 
 // 1. Read files
 const html = fs.readFileSync('index.html', 'utf8');
@@ -39,59 +39,70 @@ function formatUuidMask(value) {
 }
 
 console.log('\nTesting UUID mask formatting:');
-const testRaw1 = '1da556d388c046ec8d3379e1b5cf772f';
-const masked1 = formatUuidMask(testRaw1);
-console.log('  Raw 1:   ', testRaw1);
-console.log('  Masked 1:', masked1);
-if (masked1 !== '1da556d3-88c0-46ec-8d33-79e1b5cf772f') {
-  console.error('✗ Mask formatting failed for code 1');
-  process.exit(1);
-}
-
-const testRaw2 = 'a8bb10d34a384693bb9babcf3e3cc4da';
-const masked2 = formatUuidMask(testRaw2);
-console.log('  Raw 2:   ', testRaw2);
-console.log('  Masked 2:', masked2);
-if (masked2 !== 'a8bb10d3-4a38-4693-bb9b-abcf3e3cc4da') {
-  console.error('✗ Mask formatting failed for code 2');
+const testRaw = '1da556d388c046ec8d3379e1b5cf772f';
+const masked = formatUuidMask(testRaw);
+console.log('  Raw:   ', testRaw);
+console.log('  Masked:', masked);
+if (masked !== '1da556d3-88c0-46ec-8d33-79e1b5cf772f') {
+  console.error('✗ Mask formatting failed');
   process.exit(1);
 }
 console.log('  ✓ Mask 8-4-4-4-12 matches reference perfectly');
 
-// 5. Test Lookup via eval of script functions
-function normalizeCode(str) {
-  if (!str) return '';
-  return str.trim().toLowerCase().replace(/[^a-z0-9]/g, '');
-}
-
+// 5. Test Client Mandatory Record in script.js
+console.log('\nVerifying Client Mandatory Record:');
 const recordsMatch = js.match(/const VERIFICATION_RECORDS = (\[[\s\S]*?\]);/);
 const records = eval(recordsMatch[1]);
 
-function findRecord(searchQuery) {
-  if (!searchQuery) return null;
-  const rawClean = searchQuery.trim().toLowerCase();
-  const normalized = normalizeCode(searchQuery);
-
-  if (normalized === '1da556d388c046ec8d3379e1b5cf772f' || normalized === 'a8bb10d34a384693bb9babcf3e3cc4da') {
-    return records[0];
-  }
-
-  return records.find(record => {
-    const recordRaw = record.codigo.trim().toLowerCase();
-    const recordNorm = normalizeCode(record.codigo);
-    return recordRaw === rawClean || recordNorm === normalized;
-  }) || null;
+if (!records || records.length === 0) {
+  console.error('✗ VERIFICATION_RECORDS is empty');
+  process.exit(1);
 }
 
-const match1 = findRecord(masked1);
-console.log('\nLookup by primary code:', match1 ? `✓ FOUND -> ${match1.nome} ${match1.sobrenome}` : '✗ FAILED');
-if (!match1 || match1.nome !== 'MOHAMMAD HAKIM') process.exit(1);
+const clientRecord = records.find(r => r.codigo === '1da556d388c046ec8d3379e1b5cf772f');
+if (!clientRecord) {
+  console.error('✗ Client record 1da556d388c046ec8d3379e1b5cf772f is missing');
+  process.exit(1);
+}
 
-const match2 = findRecord(masked2);
-console.log('Lookup by PC sample code:', match2 ? `✓ FOUND -> ${match2.nome} ${match2.sobrenome}` : '✗ FAILED');
-if (!match2 || match2.nome !== 'MOHAMMAD HAKIM') process.exit(1);
+console.log('  Nome:          ', clientRecord.nome === 'SHARIFULLAH' ? '✓ SHARIFULLAH' : '✗ FAILED');
+console.log('  Sobrenome:     ', clientRecord.sobrenome === 'HAMDARD' ? '✓ HAMDARD' : '✗ FAILED');
+console.log('  RNM:           ', clientRecord.rnm === 'B269953J' ? '✓ B269953J' : '✗ FAILED');
+console.log('  Data Nasc:     ', clientRecord.nascimento === '29/02/2004' ? '✓ 29/02/2004' : '✗ FAILED');
+console.log('  Nacionalidade: ', clientRecord.nacionalidade === 'Afghanistan' ? '✓ Afghanistan' : '✗ FAILED');
+console.log('  Situação:      ', clientRecord.situacao === 'Válido até: 18 de junho de 2028' ? '✓ Válido até: 18 de junho de 2028' : '✗ FAILED');
 
-// 6. Verify Desktop and Mobile CSS Responsive Rules
+if (
+  clientRecord.nome !== 'SHARIFULLAH' ||
+  clientRecord.sobrenome !== 'HAMDARD' ||
+  clientRecord.rnm !== 'B269953J' ||
+  clientRecord.nascimento !== '29/02/2004' ||
+  clientRecord.nacionalidade !== 'Afghanistan'
+) {
+  console.error('✗ Client record data mismatch');
+  process.exit(1);
+}
+
+// 6. Verify HTML preserves the client record
+console.log('\nVerifying index.html has client record fields:');
+const htmlHasSharifullah = html.includes('SHARIFULLAH');
+const htmlHasHamdard = html.includes('HAMDARD');
+const htmlHasB269953J = html.includes('B269953J');
+const htmlHas29022004 = html.includes('29/02/2004');
+const htmlHasAfghanistan = html.includes('Afghanistan');
+
+console.log('  HTML has SHARIFULLAH:', htmlHasSharifullah ? '✓ CONFIRMED' : '✗ MISSING');
+console.log('  HTML has HAMDARD:    ', htmlHasHamdard ? '✓ CONFIRMED' : '✗ MISSING');
+console.log('  HTML has B269953J:    ', htmlHasB269953J ? '✓ CONFIRMED' : '✗ MISSING');
+console.log('  HTML has 29/02/2004:  ', htmlHas29022004 ? '✓ CONFIRMED' : '✗ MISSING');
+console.log('  HTML has Afghanistan: ', htmlHasAfghanistan ? '✓ CONFIRMED' : '✗ MISSING');
+
+if (!htmlHasSharifullah || !htmlHasHamdard || !htmlHasB269953J || !htmlHas29022004 || !htmlHasAfghanistan) {
+  console.error('✗ Client record is missing in index.html');
+  process.exit(1);
+}
+
+// 7. Verify Responsive CSS Rules
 console.log('\nChecking Responsive CSS Rules:');
 const hasDesktopMedia = css.includes('@media (min-width: 641px)');
 console.log('  Desktop Media Query (@media (min-width: 641px)):', hasDesktopMedia ? '✓ CONFIRMED' : '✗ MISSING');
@@ -105,7 +116,7 @@ const hasDesktopTwoColumnFields = css.includes('flex-direction: row;') && css.in
 console.log('  Desktop two-column data fields (flex-direction: row):', hasDesktopTwoColumnFields ? '✓ CONFIRMED' : '✗ MISSING');
 if (!hasDesktopTwoColumnFields) process.exit(1);
 
-// 7. Verify DOM IDs
+// 8. Verify DOM IDs
 const idMatches = js.matchAll(/document\.getElementById\(['"]([^'"]+)['"]\)/g);
 const idsInJs = Array.from(new Set(Array.from(idMatches, m => m[1])));
 console.log(`\nVerifying ${idsInJs.length} DOM IDs:`);
@@ -117,4 +128,4 @@ for (const id of idsInJs) {
 }
 console.log('✓ All DOM IDs matched!');
 
-console.log('\nALL RESPONSIVE (MOBILE & PC) TESTS PASSED SUCCESSFULLY!');
+console.log('\nALL CLIENT DATA & RESPONSIVE CHECKS PASSED SUCCESSFULLY!');
