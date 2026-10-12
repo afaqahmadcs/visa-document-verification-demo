@@ -269,18 +269,41 @@ if (form) {
   });
 }
 
-// Aplicação de máscara em tempo real
+// Sincronização do estado visual do campo de busca (Rótulo e Máscara)
+function updateInputState() {
+  if (!input || !inputGroup) return;
+  const hasValue = input.value.trim().length > 0;
+  if (hasValue) {
+    inputGroup.classList.add('has-value');
+  } else {
+    inputGroup.classList.remove('has-value');
+  }
+}
+
+// Aplicação de máscara em tempo real e controle de foco
 if (input) {
+  input.addEventListener('focus', () => {
+    if (inputGroup) inputGroup.classList.add('is-focused');
+    updateInputState();
+  });
+
+  input.addEventListener('blur', () => {
+    if (inputGroup) inputGroup.classList.remove('is-focused');
+    updateInputState();
+  });
+
   input.addEventListener('input', (e) => {
     clearError();
     const formatted = formatUuidMask(input.value);
     input.value = formatted;
+    updateInputState();
   });
 
   input.addEventListener('paste', (e) => {
     // Permite colar normalmente e formata no próximo frame
     setTimeout(() => {
       input.value = formatUuidMask(input.value);
+      updateInputState();
     }, 0);
   });
 }
@@ -290,6 +313,7 @@ if (btnLimpar) {
   btnLimpar.addEventListener('click', () => {
     if (input) {
       input.value = '';
+      updateInputState();
       input.focus();
     }
     clearError();
@@ -312,12 +336,17 @@ window.addEventListener('DOMContentLoaded', () => {
     const formatted = formatUuidMask(urlCode);
     if (input) {
       input.value = formatted;
+      updateInputState();
     }
     verifyDocument(urlCode);
   } else {
     if (input) {
       input.value = '';
-      input.focus();
+      updateInputState();
+      // Não foca automaticamente para exibir a caixa idêntica à Imagem 3 (sem sublinhados)
+      if (document.activeElement === input) {
+        input.blur();
+      }
     }
   }
 });

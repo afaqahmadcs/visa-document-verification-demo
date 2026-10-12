@@ -68,9 +68,9 @@ html, body {
 }
 
 .portal-logo {
-  width: 70px;
-  height: auto;
-  max-height: 86px;
+  width: 58px;
+  height: 68px;
+  max-height: 68px;
   object-fit: contain;
   display: block;
   background-color: transparent !important;
@@ -82,7 +82,7 @@ html, body {
 .search-heading {
   font-size: 20px;
   font-weight: 600;
-  color: #505050;
+  color: #656565;
   line-height: 1.25;
   margin-bottom: 20px;
   text-align: center;
@@ -105,35 +105,57 @@ html, body {
 .input-group {
   width: 100%;
   max-width: 284px;
+  height: 32px;
   background-color: #ffffff;
-  border: 1px solid #b0bec5;
+  border: 1px solid #ced4da;
   border-radius: 4px;
-  padding: 5px 8px 6px 8px;
+  padding: 0 8px;
   text-align: left;
-  transition: border-color 0.15s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
   box-sizing: border-box;
 }
 
-.input-group:focus-within {
-  border-color: #4ba3e3;
+.input-group:focus-within,
+.input-group.is-focused {
+  border-color: #7cb8eb;
+  box-shadow: 0 0 0 1px rgba(124, 184, 235, 0.45);
 }
 
 .input-group.input-error {
   border-color: #dc3545;
 }
 
+/* Floating label: In Image 3 (empty & unfocused), label is vertically centered */
 .floating-label {
-  display: block;
-  font-size: 11px;
-  font-weight: 500;
-  color: #606060;
-  line-height: 1.2;
-  margin-bottom: 3px;
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  font-weight: 400;
+  color: #656565;
+  line-height: 1;
+  pointer-events: none;
   user-select: none;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* When focused or has value: floats up to top-left like Image 1 */
+.input-group:focus-within .floating-label,
+.input-group.is-focused .floating-label,
+.input-group.has-value .floating-label {
+  top: 2px;
+  transform: translateY(0);
+  font-size: 9.5px;
+  color: #656565;
 }
 
 .codigo-input {
   width: 100%;
+  height: 100%;
   border: none;
   outline: none;
   font-family: inherit;
@@ -145,11 +167,27 @@ html, body {
   letter-spacing: 0.1px;
 }
 
+/* Offset input text down slightly when label is floating above */
+.input-group:focus-within .codigo-input,
+.input-group.is-focused .codigo-input,
+.input-group.has-value .codigo-input {
+  padding-top: 11px;
+  padding-bottom: 2px;
+}
+
+/* Placeholder mask: invisible when unfocused (Image 3), revealed when focused (Image 1) */
 .codigo-input::placeholder {
-  color: #757575;
+  color: transparent;
+  opacity: 0;
+  transition: color 0.15s ease, opacity 0.15s ease;
+}
+
+.codigo-input:focus::placeholder,
+.input-group.is-focused .codigo-input::placeholder {
+  color: #656565;
+  opacity: 0.85;
   font-size: 13px;
   letter-spacing: 0.1px;
-  opacity: 0.85;
 }
 
 /* Mensagem de Erro de Validação */
@@ -169,7 +207,7 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   margin-top: 14px;
   width: 100%;
   max-width: 284px;
@@ -177,25 +215,25 @@ html, body {
 
 .btn {
   font-family: inherit;
-  font-size: 13.5px;
+  font-size: 12.5px;
   font-weight: 400;
-  padding: 7px 20px;
+  padding: 5px 14px;
   border-radius: 4px;
   cursor: pointer;
   outline: none;
   transition: background-color 0.15s ease, opacity 0.15s ease;
-  min-width: 82px;
+  min-width: 58px;
   text-align: center;
   border: none;
 }
 
 .btn-primary {
-  background-color: #5b9be6;
+  background-color: #8cbbf0;
   color: #ffffff;
 }
 
 .btn-primary:hover {
-  background-color: #4a8cd9;
+  background-color: #7cb8eb;
 }
 
 .btn-secondary {
@@ -257,7 +295,7 @@ html, body {
 .result-heading {
   font-size: 21px;
   font-weight: 600;
-  color: #505050;
+  color: #656565;
   margin-bottom: 18px;
   text-align: center;
   letter-spacing: -0.01em;
@@ -268,7 +306,7 @@ html, body {
 .result-section-heading {
   font-size: 16px;
   font-weight: 700;
-  color: #505050;
+  color: #656565;
   margin-bottom: 15px;
   text-align: left;
 }
@@ -288,9 +326,9 @@ html, body {
 /* Rótulos em Negrito & Valores com Peso Normal */
 .field-label {
   font-size: 13px;
-  font-weight: 600;
-  color: #555555;
-  line-height: 1.3;
+  font-weight: 700;
+  color: #656565;
+  line-height: 1.35;
   margin-bottom: 2px;
   text-align: left;
 }
@@ -298,7 +336,7 @@ html, body {
 .field-value {
   font-size: 13.5px;
   font-weight: 400;
-  color: #666666;
+  color: #656565;
   line-height: 1.35;
   text-align: left;
   word-break: break-all;
@@ -400,11 +438,11 @@ html, body {
 @media (min-width: 641px) {
   /* Layout de Pesquisa no PC */
   .search-layout {
-    padding: 70px 24px 90px 24px;
+    padding: 60px 24px 80px 24px;
   }
 
   .search-box {
-    max-width: 620px;
+    max-width: 470px;
   }
 
   .logo-wrapper {
@@ -412,17 +450,18 @@ html, body {
   }
 
   .portal-logo {
-    width: 76px;
-    max-height: 94px;
+    width: 58px;
+    height: 68px;
+    max-height: 68px;
   }
 
   /* Título em uma única linha no PC */
   .search-heading {
-    font-size: 25px;
+    font-size: 22px;
     font-weight: 600;
-    color: #4a4a4a;
+    color: #656565;
     line-height: 1.25;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     white-space: normal;
   }
 
@@ -430,46 +469,56 @@ html, body {
     display: none;
   }
 
-  /* Campo de busca largo no PC */
+  /* Campo de busca no PC: exatamente 470px e altura 30px como na Imagem 1 */
   .input-group {
-    max-width: 620px;
-    padding: 6px 12px 8px 12px;
+    max-width: 470px;
+    height: 30px;
+    padding: 0 8px;
     border-radius: 4px;
   }
 
   .floating-label {
-    font-size: 11.5px;
-    margin-bottom: 4px;
+    font-size: 12px;
+    left: 8px;
+  }
+
+  .input-group:focus-within .floating-label,
+  .input-group.is-focused .floating-label,
+  .input-group.has-value .floating-label {
+    top: 2px;
+    font-size: 9.5px;
   }
 
   .codigo-input {
-    font-size: 14px;
-    letter-spacing: 0.2px;
+    font-size: 13px;
+    letter-spacing: 0.1px;
   }
 
-  .codigo-input::placeholder {
-    font-size: 14px;
-    letter-spacing: 0.2px;
+  .codigo-input:focus::placeholder,
+  .input-group.is-focused .codigo-input::placeholder {
+    font-size: 13px;
+    letter-spacing: 0.1px;
   }
 
   .input-error-msg {
-    max-width: 620px;
+    max-width: 470px;
     font-size: 12.5px;
   }
 
   .button-group {
-    max-width: 620px;
-    gap: 12px;
-    margin-top: 18px;
+    max-width: 470px;
+    gap: 8px;
+    margin-top: 14px;
   }
 
   .btn {
-    font-size: 14px;
-    padding: 8px 24px;
-    min-width: 90px;
+    font-size: 12.5px;
+    padding: 5px 16px;
+    min-width: 60px;
+    border-radius: 3px;
   }
 
-  /* Layout do Resultado no PC (Fiel à Imagem 3 do PC) */
+  /* Layout do Resultado no PC (Fiel à Imagem 4) */
   .result-layout {
     padding: 60px 60px 90px 60px;
     align-items: stretch;
@@ -487,25 +536,25 @@ html, body {
   }
 
   .result-heading {
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 600;
-    color: #4a4a4a;
-    margin-bottom: 38px;
+    color: #656565;
+    margin-bottom: 34px;
     text-align: center;
   }
 
   .result-section-heading {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
-    color: #4a4a4a;
-    margin-bottom: 24px;
+    color: #656565;
+    margin-bottom: 22px;
     text-align: left;
   }
 
   .document-data-list {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
     width: 100%;
     max-width: 800px;
   }
@@ -525,24 +574,50 @@ html, body {
     flex-shrink: 0;
     font-size: 14px;
     font-weight: 700;
-    color: #4a4a4a;
+    color: #656565;
     margin-bottom: 0;
   }
 
   .field-value {
     font-size: 14px;
     font-weight: 400;
-    color: #555555;
+    color: #656565;
     line-height: 1.4;
   }
 
   .result-actions {
-    margin-top: 48px;
+    margin-top: 44px;
     justify-content: center;
   }
 
+  .go-back-icon-box {
+    display: none;
+  }
+
+  .go-back-btn {
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 4px;
+    padding: 7px 36px;
+    min-width: 137px;
+    justify-content: center;
+    transition: background-color 0.15s ease;
+  }
+
+  .go-back-btn:hover {
+    background-color: #e5e5e5;
+  }
+
+  .go-back-label {
+    color: #656565;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
   .btn-voltar-simple {
-    padding: 9px 40px;
-    font-size: 14px;
+    padding: 7px 36px;
+    font-size: 13px;
+    background-color: #f0f0f0;
+    color: #656565;
   }
 }
