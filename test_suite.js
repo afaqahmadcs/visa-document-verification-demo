@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-console.log('--- VALIDATING CLIENT MANDATORY DATA (WARIS & SHARIFULLAH) & ENGLISH PORTAL ---');
+console.log('--- VALIDATING CLIENT MANDATORY DATA (SHARIFULLAH HAMDARD) & ENGLISH PORTAL ---');
 
 // 1. Read files
 const html = fs.readFileSync('index.html', 'utf8');
@@ -39,18 +39,18 @@ function formatUuidMask(value) {
 }
 
 console.log('\nTesting UUID mask formatting:');
-const testRaw = 'a8bb10d34a384693bb9babcf3e3cc4da';
+const testRaw = '1da556d388c046ec8d3379e1b5cf772f';
 const masked = formatUuidMask(testRaw);
 console.log('  Raw:   ', testRaw);
 console.log('  Masked:', masked);
-if (masked !== 'a8bb10d3-4a38-4693-bb9b-abcf3e3cc4da') {
+if (masked !== '1da556d3-88c0-46ec-8d33-79e1b5cf772f') {
   console.error('✗ Mask formatting failed');
   process.exit(1);
 }
 console.log('  ✓ Mask 8-4-4-4-12 matches reference perfectly');
 
 // 5. Test Records in script.js
-console.log('\nVerifying Client Records in script.js:');
+console.log('\nVerifying Client Record in script.js:');
 const recordsMatch = js.match(/const VERIFICATION_RECORDS = (\[[\s\S]*?\]);/);
 const records = eval(recordsMatch[1]);
 
@@ -59,37 +59,31 @@ if (!records || records.length === 0) {
   process.exit(1);
 }
 
-const warisRecord = records.find(r => r.codigo === 'a8bb10d34a384693bb9babcf3e3cc4da');
-const sharifullahRecord = records.find(r => r.codigo === '1da556d388c046ec8d3379e1b5cf772f');
+const clientRecord = records.find(r => r.codigo === '1da556d388c046ec8d3379e1b5cf772f');
 
-if (!warisRecord) {
-  console.error('✗ Record for WARIS MUHAMMADI (a8bb10d34a384693bb9babcf3e3cc4da) is missing');
-  process.exit(1);
-}
-if (!sharifullahRecord) {
+if (!clientRecord) {
   console.error('✗ Record for SHARIFULLAH HAMDARD (1da556d388c046ec8d3379e1b5cf772f) is missing');
   process.exit(1);
 }
 
-console.log('  [WARIS MUHAMMADI]:', warisRecord.nome === 'WARIS' && warisRecord.sobrenome === 'MUHAMMADI' ? '✓ CONFIRMED' : '✗ FAILED');
-console.log('  [SHARIFULLAH HAMDARD]:', sharifullahRecord.nome === 'SHARIFULLAH' && sharifullahRecord.sobrenome === 'HAMDARD' ? '✓ CONFIRMED' : '✗ FAILED');
+console.log('  [SHARIFULLAH HAMDARD]:', clientRecord.nome === 'SHARIFULLAH' && clientRecord.sobrenome === 'HAMDARD' ? '✓ CONFIRMED' : '✗ FAILED');
 
-// 6. Verify HTML preserves the primary record
-console.log('\nVerifying index.html has English primary record fields:');
-const htmlHasWaris = html.includes('WARIS');
-const htmlHasMuhammadi = html.includes('MUHAMMADI');
+// 6. Verify HTML preserves the record
+console.log('\nVerifying index.html has English record fields:');
+const htmlHasSharifullah = html.includes('SHARIFULLAH');
+const htmlHasHamdard = html.includes('HAMDARD');
 const htmlHasB269953J = html.includes('B269953J');
-const htmlHasInactive = html.includes('Inactive');
+const htmlHas29022004 = html.includes('29/02/2004');
 const htmlHasAfghanistan = html.includes('Afghanistan');
 
-console.log('  HTML has WARIS:       ', htmlHasWaris ? '✓ CONFIRMED' : '✗ MISSING');
-console.log('  HTML has MUHAMMADI:   ', htmlHasMuhammadi ? '✓ CONFIRMED' : '✗ MISSING');
+console.log('  HTML has SHARIFULLAH: ', htmlHasSharifullah ? '✓ CONFIRMED' : '✗ MISSING');
+console.log('  HTML has HAMDARD:     ', htmlHasHamdard ? '✓ CONFIRMED' : '✗ MISSING');
 console.log('  HTML has B269953J:    ', htmlHasB269953J ? '✓ CONFIRMED' : '✗ MISSING');
-console.log('  HTML has Inactive:    ', htmlHasInactive ? '✓ CONFIRMED' : '✗ MISSING');
+console.log('  HTML has 29/02/2004:  ', htmlHas29022004 ? '✓ CONFIRMED' : '✗ MISSING');
 console.log('  HTML has Afghanistan: ', htmlHasAfghanistan ? '✓ CONFIRMED' : '✗ MISSING');
 
-if (!htmlHasWaris || !htmlHasMuhammadi || !htmlHasB269953J || !htmlHasInactive || !htmlHasAfghanistan) {
-  console.error('✗ Primary record fields missing in index.html');
+if (!htmlHasSharifullah || !htmlHasHamdard || !htmlHasB269953J || !htmlHas29022004 || !htmlHasAfghanistan) {
+  console.error('✗ Client record fields missing in index.html');
   process.exit(1);
 }
 

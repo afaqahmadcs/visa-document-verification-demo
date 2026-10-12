@@ -10,15 +10,6 @@
    ========================================================================== */
 const VERIFICATION_RECORDS = [
   {
-    codigo: 'a8bb10d34a384693bb9babcf3e3cc4da',
-    situacao: 'Inactive',
-    nome: 'WARIS',
-    sobrenome: 'MUHAMMADI',
-    rnm: 'B269953J',
-    nascimento: '15/05/2005',
-    nacionalidade: 'Afghanistan'
-  },
-  {
     codigo: '1da556d388c046ec8d3379e1b5cf772f',
     situacao: 'Valid until: June 18, 2028',
     nome: 'SHARIFULLAH',
