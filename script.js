@@ -199,11 +199,59 @@ function verifyDocument(codeToVerify) {
 }
 
 /**
+ * Detecta código verificador presente na URL (parâmetro, query, hash ou caminho)
+ * Suporta:
+ * - https://servicosdpfgovbr.vercel.app/1da556d388c046ec8d3379e1b5cf772f
+ * - https://servicosdpfgovbr.vercel.app/1da556d3-88c0-46ec-8d33-79e1b5cf772f
+ * - https://servicosdpfgovbr.vercel.app/?codigo=1da556d388c046ec8d3379e1b5cf772f
+ * - https://servicosdpfgovbr.vercel.app/?1da556d388c046ec8d3379e1b5cf772f
+ * - https://servicosdpfgovbr.vercel.app/#1da556d388c046ec8d3379e1b5cf772f
+ */
+function getCodeFromUrl() {
+  try {
+    // 1. Parâmetro de busca padrão (?codigo=... ou ?code=...)
+    const params = new URLSearchParams(window.location.search);
+    const paramCode = params.get('codigo') || params.get('code');
+    if (paramCode && normalizeCode(paramCode).length === 32) {
+      return paramCode.trim();
+    }
+
+    // 2. Query string direta sem chave (?1da556d388c046ec8d3379e1b5cf772f)
+    const rawSearch = window.location.search.replace(/^\?/, '').trim();
+    if (rawSearch && !rawSearch.includes('=') && normalizeCode(rawSearch).length === 32) {
+      return rawSearch;
+    }
+
+    // 3. Hash da URL (#1da556d388c046ec8d3379e1b5cf772f)
+    const rawHash = window.location.hash.replace(/^#/, '').trim();
+    if (rawHash && normalizeCode(rawHash).length === 32) {
+      return rawHash;
+    }
+
+    // 4. Caminho direto (/1da556d388c046ec8d3379e1b5cf772f)
+    const pathParts = window.location.pathname.split('/').filter(Boolean);
+    for (const part of pathParts) {
+      if (normalizeCode(part).length === 32) {
+        return part.trim();
+      }
+    }
+  } catch (err) {
+    console.warn('Erro ao processar código da URL:', err);
+  }
+
+  return null;
+}
+
+/**
  * Retorna para a tela de pesquisa
  */
 function goBackToSearch() {
   showView(searchView);
   clearError();
+  // Limpa o caminho da URL caso tenha sido acessado diretamente via link com código
+  if (window.history && window.history.pushState) {
+    window.history.pushState({}, '', '/');
+  }
   if (input) {
     input.focus();
   }
@@ -257,10 +305,19 @@ if (btnVoltarNotFound) {
   btnVoltarNotFound.addEventListener('click', goBackToSearch);
 }
 
-// Inicialização: O campo permanece vazio no carregamento
+// Inicialização: Se a URL contiver código verificador, executa a consulta automaticamente
 window.addEventListener('DOMContentLoaded', () => {
-  if (input) {
-    input.value = '';
-    input.focus();
+  const urlCode = getCodeFromUrl();
+  if (urlCode) {
+    const formatted = formatUuidMask(urlCode);
+    if (input) {
+      input.value = formatted;
+    }
+    verifyDocument(urlCode);
+  } else {
+    if (input) {
+      input.value = '';
+      input.focus();
+    }
   }
 });

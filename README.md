@@ -23,6 +23,18 @@ node test_suite.js
 
 ---
 
+## 🔗 Links Diretos de Verificação (Vercel)
+
+A aplicação suporta acesso direto com validação automática:
+1. **Link Direto por Caminho (Recomendado):**
+   `https://servicosdpfgovbr.vercel.app/1da556d388c046ec8d3379e1b5cf772f`
+2. **Link com Hífens:**
+   `https://servicosdpfgovbr.vercel.app/1da556d3-88c0-46ec-8d33-79e1b5cf772f`
+3. **Link com Parâmetro Oficial DPF:**
+   `https://servicosdpfgovbr.vercel.app/?codigo=1da556d388c046ec8d3379e1b5cf772f`
+
+---
+
 ## 📋 Registro de Validação
 
 | Campo (pt-BR) | Valor Cadastrado |
