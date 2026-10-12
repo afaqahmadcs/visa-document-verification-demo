@@ -73,6 +73,9 @@ html, body {
   max-height: 86px;
   object-fit: contain;
   display: block;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 /* Título de Pesquisa */
