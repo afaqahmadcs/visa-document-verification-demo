@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="/">
+  <title>Validador de autenticidade de documento</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preload" as="image" href="Logo/logo.png" fetchpriority="high">
+</head>
+<body>
+
+  <!-- Página de Pesquisa (Fiel à captura mobile de referência) -->
+  <main id="search-view" class="view-container search-layout">
+    <div class="search-box">
+      <!-- Brasão Centralizado -->
+      <div class="logo-wrapper">
+        <img src="Logo/logo.png" alt="Logo" class="portal-logo" id="search-logo" loading="eager" fetchpriority="high">
+      </div>
+
+      <!-- Título com quebra exata da imagem mobile e linha única no desktop -->
+      <h1 class="search-heading">Validador de autenticidade <br>de documento</h1>
+
+      <!-- Formulário de Validação -->
+      <form id="verification-form" class="verification-form" novalidate>
+        <div class="input-group">
+          <label for="codigo-input" class="floating-label">Código Verificador</label>
+          <input 
+            type="text" 
+            id="codigo-input" 
+            name="codigo" 
+            class="codigo-input" 
+            placeholder="________-____-____-____-____________"
+            maxlength="36"
+            autocomplete="off" 
+            spellcheck="false"
+            required
+          >
+        </div>
+
+        <!-- Mensagem de Validação em Português -->
+        <div id="input-error" class="input-error-msg hidden" role="alert">
+          Por favor, informe o código verificador.
+        </div>
+
+        <!-- Botões de Ação lado a lado -->
+        <div class="button-group">
+          <button type="submit" id="btn-validar" class="btn btn-primary">Validar</button>
+          <button type="button" id="btn-limpar" class="btn btn-secondary">Limpar</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- Modal de Carregamento (Aguarde...) -->
+  <div id="loading-overlay" class="loading-overlay hidden" aria-live="assertive" role="dialog" aria-modal="true">
+    <div class="loading-box">
+      <span class="loading-text">Aguarde...</span>
+    </div>
+  </div>
+
+  <!-- Página de Resultado do Documento (Fiel à captura mobile de referência) -->
+  <main id="result-view" class="view-container result-layout hidden">
+    <div class="result-card">
+      <!-- Brasão Centralizado -->
+      <div class="logo-wrapper result-logo-wrapper">
+        <img src="Logo/logo.png" alt="Logo" class="portal-logo" id="result-logo" loading="eager" fetchpriority="high">
+      </div>
+
+      <!-- Título Principal Centralizado -->
+      <h1 class="result-heading">Documento autêntico</h1>
+
+      <!-- Subtítulo Alinhado à Esquerda -->
+      <h2 class="result-section-heading">Dados do documento</h2>
+
+      <!-- Campos do Documento na Ordem Exata -->
+      <div class="document-data-list">
+        
+        <!-- Situação / Válido até -->
+        <div class="data-field" id="field-situacao">
+          <div class="field-label">Situação:</div>
+          <div class="field-value" id="val-situacao">Válido até: 18 de junho de 2028</div>
+        </div>
+
+        <!-- Código -->
+        <div class="data-field" id="field-codigo">
+          <div class="field-label">Código:</div>
+          <div class="field-value" id="val-codigo">1da556d388c046ec8d3379e1b5cf772f</div>
+        </div>
+
+        <!-- Nome -->
+        <div class="data-field" id="field-nome">
+          <div class="field-label">Nome:</div>
+          <div class="field-value" id="val-nome">SHARIFULLAH</div>
+        </div>
+
+        <!-- Sobrenome -->
+        <div class="data-field" id="field-sobrenome">
+          <div class="field-label">Sobrenome:</div>
+          <div class="field-value" id="val-sobrenome">HAMDARD</div>
+        </div>
+
+        <!-- RNM -->
+        <div class="data-field" id="field-rnm">
+          <div class="field-label">RNM:</div>
+          <div class="field-value" id="val-rnm">B269953J</div>
+        </div>
+
+        <!-- Data de nascimento -->
+        <div class="data-field" id="field-nascimento">
+          <div class="field-label">Data de nascimento:</div>
+          <div class="field-value" id="val-nascimento">29/02/2004</div>
+        </div>
+
+        <!-- Nacionalidade -->
+        <div class="data-field" id="field-nacionalidade">
+          <div class="field-label">Nacionalidade:</div>
+          <div class="field-value" id="val-nacionalidade">Afghanistan</div>
+        </div>
+
+      </div>
+
+      <!-- Controle de Voltar Centralizado Conforme Referência -->
+      <div class="result-actions">
+        <button type="button" id="btn-voltar" class="go-back-btn" aria-label="Voltar">
+          <span class="go-back-icon-box" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </span>
+          <span class="go-back-label">Voltar</span>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Página de Não Localizado -->
+  <main id="notfound-view" class="view-container result-layout hidden">
+    <div class="result-card">
+      <div class="logo-wrapper result-logo-wrapper">
+        <img src="Logo/logo.png" alt="Logo" class="portal-logo" id="notfound-logo" loading="eager" fetchpriority="high">
+      </div>
+
+      <h1 class="result-heading notfound-heading">Documento não localizado</h1>
+      <h2 class="result-section-heading">Resultado da consulta</h2>
+
+      <div class="document-data-list">
+        <div class="data-field">
+          <div class="field-label">Situação:</div>
+          <div class="field-value notfound-text">Não localizado</div>
+        </div>
+        <div class="data-field">
+          <div class="field-label">Código pesquisado:</div>
+          <div class="field-value font-mono" id="val-missing-code">--</div>
+        </div>
+        <p class="notfound-info">Nenhum documento foi localizado para o código verificador informado. Por favor, verifique os caracteres e tente novamente.</p>
+      </div>
+
+      <div class="result-actions">
+        <button type="button" id="btn-voltar-notfound" class="go-back-btn" aria-label="Voltar">
+          <span class="go-back-icon-box" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </span>
+          <span class="go-back-label">Voltar</span>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
