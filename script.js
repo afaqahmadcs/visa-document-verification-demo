@@ -329,8 +329,9 @@ if (btnVoltarNotFound) {
   btnVoltarNotFound.addEventListener('click', goBackToSearch);
 }
 
-// Inicialização: Se a URL contiver código verificador, executa a consulta automaticamente
+// Inicialização: Se a URL contiver código verificador, preenche o campo na tela de pesquisa (sem ir direto para o documento)
 window.addEventListener('DOMContentLoaded', () => {
+  showView(searchView);
   const urlCode = getCodeFromUrl();
   if (urlCode) {
     const formatted = formatUuidMask(urlCode);
@@ -338,7 +339,6 @@ window.addEventListener('DOMContentLoaded', () => {
       input.value = formatted;
       updateInputState();
     }
-    verifyDocument(urlCode);
   } else {
     if (input) {
       input.value = '';
