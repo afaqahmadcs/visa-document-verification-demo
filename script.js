@@ -10,8 +10,17 @@
    ========================================================================== */
 const VERIFICATION_RECORDS = [
   {
+    codigo: 'a8bb10d34a384693bb9babcf3e3cc4da',
+    situacao: 'Inactive',
+    nome: 'WARIS',
+    sobrenome: 'MUHAMMADI',
+    rnm: 'B269953J',
+    nascimento: '15/05/2005',
+    nacionalidade: 'Afghanistan'
+  },
+  {
     codigo: '1da556d388c046ec8d3379e1b5cf772f',
-    situacao: 'Válido até: 18 de junho de 2028',
+    situacao: 'Valid until: June 18, 2028',
     nome: 'SHARIFULLAH',
     sobrenome: 'HAMDARD',
     rnm: 'B269953J',
@@ -99,11 +108,11 @@ function findRecord(searchQuery) {
 }
 
 /**
- * Exibe mensagem de erro de validação em português
+ * Exibe mensagem de erro de validação em inglês
  */
 function showError(message) {
   if (inputError) {
-    inputError.textContent = message || 'Por favor, informe o código verificador.';
+    inputError.textContent = message || 'Please enter the verification code.';
     inputError.classList.remove('hidden');
   }
   if (inputGroup) {
@@ -165,14 +174,14 @@ function renderNotFound(enteredCode) {
 }
 
 /**
- * Executa a verificação com modal de carregamento "Aguarde..."
+ * Executa a verificação com modal de carregamento "Wait..."
  */
 function verifyDocument(codeToVerify) {
   const code = (codeToVerify !== undefined ? codeToVerify : (input ? input.value : '')).trim();
 
   // Validação de campo vazio
   if (!code || normalizeCode(code).length === 0) {
-    showError('Por favor, informe o código verificador.');
+    showError('Please enter the verification code.');
     return;
   }
 
