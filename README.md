@@ -1,80 +1,45 @@
-# Validador de Autenticidade de Documento
+# Document Authenticity Validator
 
-Portal de verificação de autenticidade de documentos em **Português do Brasil (`pt-BR`)**, desenvolvido estritamente conforme o fluxo e capturas de tela de referência.
+A web application for document authenticity validation, built to replicate official document verification portals with responsive layouts, real-time input formatting, and clean client-side routing.
 
 ---
 
-## 🚀 Como Executar Localmente
+## 🚀 How to Run Locally
 
-### Opção 1: Abrir Diretamente no Navegador
-Abra o arquivo [`index.html`](file:///d:/US%20Client/visa-verification-demo/index.html) diretamente com qualquer navegador moderno.
+### Option 1: Open Directly in Browser
+Open [`index.html`](file:///d:/US%20Client/visa-verification-demo/index.html) directly with any modern web browser.
 
-### Opção 2: Servidor HTTP Local (Python)
-Execute no terminal da pasta:
+### Option 2: Local HTTP Server (Python)
+Run the following command in the project directory:
 ```bash
 python -m http.server 8080
 ```
-Em seguida, acesse no navegador: `http://localhost:8080`
+Then visit in your browser: `http://localhost:8080`
 
-### Opção 3: Executar Testes Automatizados (Node.js)
+### Option 3: Automated Test Suite (Node.js)
 ```bash
 node test_suite.js
 ```
 
 ---
 
-## 🔗 Links Diretos de Verificação (Vercel)
+## 📌 Features & Architecture
 
-A aplicação suporta acesso direto com validação automática:
-1. **Link Direto por Caminho (Recomendado):**
-   `https://servicosdpfgovbr.vercel.app/1da556d388c046ec8d3379e1b5cf772f`
-2. **Link com Hífens:**
-   `https://servicosdpfgovbr.vercel.app/1da556d3-88c0-46ec-8d33-79e1b5cf772f`
-3. **Link com Parâmetro Oficial DPF:**
-   `https://servicosdpfgovbr.vercel.app/?codigo=1da556d388c046ec8d3379e1b5cf772f`
+1. **Search & Validation Screen:**
+   - Responsive multi-line heading on mobile and single-line layout on desktop.
+   - Clean, centered input box with floating label (`Verification Code`).
+   - Dynamic real-time UUID formatting mask (8-4-4-4-12 pattern).
+   - Validation handling: prompts user if submitted with an empty code.
+   - Action buttons: `Validate` and `To clean`.
 
----
+2. **Loading State:**
+   - Realistic loading overlay (`Wait...`) simulating authentication query processing.
 
-## 📋 Registro de Validação
+3. **Document Result Screen:**
+   - Official badge header and clean headings (`Authentic document` / `Document data`).
+   - Uniform data layout displaying status, document code, name, and identity details.
+   - Single-click return button (`To go back`).
 
-| Campo (pt-BR) | Valor Cadastrado |
-| :--- | :--- |
-| **Situação** | `Válido até: 18 de junho de 2028` |
-| **Código** | `1da556d388c046ec8d3379e1b5cf772f` |
-| **Nome** | `SHARIFULLAH` |
-| **Sobrenome** | `HAMDARD` |
-| **RNM** | `B269953J` |
-| **Data de nascimento** | `29/02/2004` |
-| **Nacionalidade** | `Afghanistan` |
-
----
-
-## 📌 Especificações e Fluxo Responsivo (Mobile & PC/Laptop)
-
-1. **Página de Pesquisa:**
-   - **Mobile:**
-     - Título dividido em duas linhas conforme referência mobile: `Validador de autenticidade`<br>`de documento`.
-     - Campo de busca compacto (284px de largura).
-   - **PC / Laptop:**
-     - Título fluido em linha única centralizado: `Validador de autenticidade de documento`.
-     - Campo de busca largo (620px de largura) com foco em azul suave (`#4ba3e3`).
-   - Máscara UUID automática em tempo real (8-4-4-4-12): `________-____-____-____-____________`.
-   - Botões centralizados lado a lado: `Validar` (azul) e `Limpar` (cinza claro).
-   - Validação imediata: Alerta se o campo estiver vazio ao clicar em **Validar**.
-
-2. **Modal de Carregamento:**
-   - Caixa escura com texto `Aguarde...` com temporização realista (~600ms).
-
-3. **Página de Resultado do Documento:**
-   - **Mobile:**
-     - Layout vertical compacto (284px) com rótulo acima e valor abaixo em cada linha.
-     - Botão `Voltar` cinza claro centralizado.
-   - **PC / Laptop:**
-     - Brasão e título principal (`Documento autêntico`) centralizados no topo.
-     - Subtítulo `Dados do documento` alinhado à esquerda.
-     - Grade horizontal em duas colunas: Coluna de rótulos à esquerda (em negrito) e coluna de valores à direita.
-     - Botão `Voltar` cinza claro centralizado na parte inferior da tela.
-
-4. **Sem Conteúdo Adicional:**
-   - Sem cabeçalhos supérfluos, rodapés ou widgets de tradução de terceiros.
-
+4. **Single Page Routing & Direct URL Support:**
+   - Supports direct slug and query parameter URL lookups on Vercel deployment.
+   - Configured with SPA rewrite rules in `vercel.json`.
