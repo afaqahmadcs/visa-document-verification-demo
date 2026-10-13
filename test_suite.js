@@ -72,17 +72,19 @@ console.log('  [SHARIFULLAH HAMDARD]:', clientRecord.nome === 'SHARIFULLAH' && c
 console.log('\nVerifying index.html has English record fields:');
 const htmlHasSharifullah = html.includes('SHARIFULLAH');
 const htmlHasHamdard = html.includes('HAMDARD');
-const htmlHasB269953J = html.includes('B269953J');
+const htmlHasRNM = html.includes('F907916R');
+const htmlHasApril = html.includes('April 18, 2028');
 const htmlHas29022004 = html.includes('29/02/2004');
 const htmlHasAfghanistan = html.includes('Afghanistan');
 
-console.log('  HTML has SHARIFULLAH: ', htmlHasSharifullah ? '✓ CONFIRMED' : '✗ MISSING');
-console.log('  HTML has HAMDARD:     ', htmlHasHamdard ? '✓ CONFIRMED' : '✗ MISSING');
-console.log('  HTML has B269953J:    ', htmlHasB269953J ? '✓ CONFIRMED' : '✗ MISSING');
-console.log('  HTML has 29/02/2004:  ', htmlHas29022004 ? '✓ CONFIRMED' : '✗ MISSING');
-console.log('  HTML has Afghanistan: ', htmlHasAfghanistan ? '✓ CONFIRMED' : '✗ MISSING');
+console.log('  HTML has SHARIFULLAH:   ', htmlHasSharifullah ? '✓ CONFIRMED' : '✗ MISSING');
+console.log('  HTML has HAMDARD:       ', htmlHasHamdard ? '✓ CONFIRMED' : '✗ MISSING');
+console.log('  HTML has F907916R:      ', htmlHasRNM ? '✓ CONFIRMED' : '✗ MISSING');
+console.log('  HTML has April 18, 2028:', htmlHasApril ? '✓ CONFIRMED' : '✗ MISSING');
+console.log('  HTML has 29/02/2004:    ', htmlHas29022004 ? '✓ CONFIRMED' : '✗ MISSING');
+console.log('  HTML has Afghanistan:   ', htmlHasAfghanistan ? '✓ CONFIRMED' : '✗ MISSING');
 
-if (!htmlHasSharifullah || !htmlHasHamdard || !htmlHasB269953J || !htmlHas29022004 || !htmlHasAfghanistan) {
+if (!htmlHasSharifullah || !htmlHasHamdard || !htmlHasRNM || !htmlHasApril || !htmlHas29022004 || !htmlHasAfghanistan) {
   console.error('✗ Client record fields missing in index.html');
   process.exit(1);
 }
