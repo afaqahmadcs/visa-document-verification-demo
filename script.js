@@ -94,7 +94,7 @@ function findRecord(searchQuery) {
   return VERIFICATION_RECORDS.find(record => {
     const recordRaw = record.codigo.trim().toLowerCase();
     const recordNorm = normalizeCode(record.codigo);
-    return recordRaw === rawClean || recordNorm === normalized || normalized === '1da556d388c046ec8d3379e1b5cf772f';
+    return recordRaw === rawClean || recordNorm === normalized;
   }) || null;
 }
 
