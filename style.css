@@ -298,7 +298,8 @@ html, body {
   font-size: 21.5px;
   font-weight: 700;
   color: #4a4c4b;
-  margin-bottom: 22px;
+  line-height: 1.15;
+  margin-bottom: 9px;
   text-align: center;
   letter-spacing: -0.01em;
   width: 100%;
@@ -544,7 +545,8 @@ html, body {
     font-size: 24px;
     font-weight: 700;
     color: #4a4c4b;
-    margin-bottom: 34px;
+    line-height: 1.15;
+    margin-bottom: 12px;
     text-align: center;
   }
 
