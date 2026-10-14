@@ -332,29 +332,15 @@ if (btnVoltarNotFound) {
   btnVoltarNotFound.addEventListener('click', goBackToSearch);
 }
 
-// Inicialização: Se a URL contiver código verificador, exibe diretamente o documento correspondente
+// Inicialização: Exibe a tela de pesquisa com o código já preenchido no campo de texto
 window.addEventListener('DOMContentLoaded', () => {
-  const urlCode = getCodeFromUrl();
-  if (urlCode) {
-    const formatted = formatUuidMask(urlCode);
-    if (input) {
-      input.value = formatted;
-      updateInputState();
-    }
-    const match = findRecord(urlCode);
-    if (match) {
-      renderResult(match, urlCode);
-    } else {
-      renderNotFound(urlCode);
-    }
-  } else {
-    showView(searchView);
-    if (input) {
-      input.value = '';
-      updateInputState();
-      if (document.activeElement === input) {
-        input.blur();
-      }
+  showView(searchView);
+  const urlCode = getCodeFromUrl() || '1da662d388c046ec8d5579e1b5cf774f';
+  if (input) {
+    input.value = formatUuidMask(urlCode);
+    updateInputState();
+    if (document.activeElement === input) {
+      input.blur();
     }
   }
 });
