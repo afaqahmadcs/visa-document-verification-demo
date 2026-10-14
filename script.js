@@ -192,6 +192,9 @@ function verifyDocument(codeToVerify) {
     const match = findRecord(code);
     if (match) {
       renderResult(match, code);
+      if (window.history && window.history.pushState) {
+        window.history.pushState({}, '', '/' + match.codigo);
+      }
     } else {
       renderNotFound(code);
     }
@@ -329,9 +332,8 @@ if (btnVoltarNotFound) {
   btnVoltarNotFound.addEventListener('click', goBackToSearch);
 }
 
-// Inicialização: Se a URL contiver código verificador, preenche o campo na tela de pesquisa (sem ir direto para o documento)
+// Inicialização: Se a URL contiver código verificador, exibe diretamente o documento correspondente
 window.addEventListener('DOMContentLoaded', () => {
-  showView(searchView);
   const urlCode = getCodeFromUrl();
   if (urlCode) {
     const formatted = formatUuidMask(urlCode);
@@ -339,11 +341,17 @@ window.addEventListener('DOMContentLoaded', () => {
       input.value = formatted;
       updateInputState();
     }
+    const match = findRecord(urlCode);
+    if (match) {
+      renderResult(match, urlCode);
+    } else {
+      renderNotFound(urlCode);
+    }
   } else {
+    showView(searchView);
     if (input) {
       input.value = '';
       updateInputState();
-      // Não foca automaticamente para exibir a caixa idêntica à Imagem 3 (sem sublinhados)
       if (document.activeElement === input) {
         input.blur();
       }
