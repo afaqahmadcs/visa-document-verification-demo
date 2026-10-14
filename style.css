@@ -228,12 +228,12 @@ html, body {
 }
 
 .btn-primary {
-  background-color: #8cbbf0;
+  background-color: #4d8ee8;
   color: #ffffff;
 }
 
 .btn-primary:hover {
-  background-color: #7cb8eb;
+  background-color: #387bd5;
 }
 
 .btn-secondary {
@@ -282,13 +282,15 @@ html, body {
 .result-layout {
   background-color: #fafafa;
   padding: 40px 16px 60px 16px;
+  align-items: center;
 }
 
 .result-card {
   width: 100%;
-  max-width: 284px;
+  max-width: 320px;
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
 }
 
 /* "Documento autêntico" Centralizado */
@@ -518,16 +520,19 @@ html, body {
     border-radius: 3px;
   }
 
-  /* Layout do Resultado no PC (Fiel à Imagem 4) */
+  /* Layout do Resultado no PC (Centralizado e Fiel) */
   .result-layout {
-    padding: 60px 60px 90px 60px;
-    align-items: stretch;
+    padding: 60px 24px 90px 24px;
+    align-items: center;
   }
 
   .result-card {
-    max-width: 100%;
+    max-width: 720px;
     width: 100%;
-    margin: 0;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .result-logo-wrapper {
@@ -549,6 +554,8 @@ html, body {
     color: #656565;
     margin-bottom: 22px;
     text-align: left;
+    width: 100%;
+    max-width: 720px;
   }
 
   .document-data-list {
@@ -556,7 +563,7 @@ html, body {
     flex-direction: column;
     gap: 14px;
     width: 100%;
-    max-width: 800px;
+    max-width: 720px;
   }
 
   /* Cada campo em linha horizontal: Rótulo à esquerda, Valor à direita */
@@ -588,29 +595,34 @@ html, body {
   .result-actions {
     margin-top: 44px;
     justify-content: center;
+    width: 100%;
   }
 
   .go-back-icon-box {
-    display: none;
+    display: flex;
   }
 
   .go-back-btn {
-    background-color: #f0f0f0;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
     border: none;
-    border-radius: 4px;
-    padding: 7px 36px;
-    min-width: 137px;
-    justify-content: center;
-    transition: background-color 0.15s ease;
+    cursor: pointer;
+    padding: 6px 14px;
+    border-radius: 6px;
+    min-width: auto;
+    transition: opacity 0.15s ease, transform 0.1s ease;
   }
 
   .go-back-btn:hover {
-    background-color: #e5e5e5;
+    opacity: 0.88;
+    background: transparent;
   }
 
   .go-back-label {
-    color: #656565;
-    font-size: 13px;
+    color: #495057;
+    font-size: 14px;
     font-weight: 500;
   }
 

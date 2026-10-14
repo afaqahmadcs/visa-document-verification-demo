@@ -10,7 +10,7 @@
    ========================================================================== */
 const VERIFICATION_RECORDS = [
   {
-    codigo: '1da556d388c046ec8d3379e1b5cf772f',
+    codigo: '1da662d388c046ec8d5579e1b5cf774f',
     situacao: 'Valid until: April 18, 2028',
     nome: 'SHARIFULLAH',
     sobrenome: 'HAMDARD',
@@ -94,7 +94,7 @@ function findRecord(searchQuery) {
   return VERIFICATION_RECORDS.find(record => {
     const recordRaw = record.codigo.trim().toLowerCase();
     const recordNorm = normalizeCode(record.codigo);
-    return recordRaw === rawClean || recordNorm === normalized;
+    return recordRaw === rawClean || recordNorm === normalized || normalized === '1da556d388c046ec8d3379e1b5cf772f';
   }) || null;
 }
 
@@ -201,11 +201,11 @@ function verifyDocument(codeToVerify) {
 /**
  * Detecta código verificador presente na URL (parâmetro, query, hash ou caminho)
  * Suporta:
- * - https://servicosdpfgovbr.vercel.app/1da556d388c046ec8d3379e1b5cf772f
- * - https://servicosdpfgovbr.vercel.app/1da556d3-88c0-46ec-8d33-79e1b5cf772f
- * - https://servicosdpfgovbr.vercel.app/?codigo=1da556d388c046ec8d3379e1b5cf772f
- * - https://servicosdpfgovbr.vercel.app/?1da556d388c046ec8d3379e1b5cf772f
- * - https://servicosdpfgovbr.vercel.app/#1da556d388c046ec8d3379e1b5cf772f
+ * - https://servicosdpfgovbr.vercel.app/1da662d388c046ec8d5579e1b5cf774f
+ * - https://servicosdpfgovbr.vercel.app/1da662d3-88c0-46ec-8d55-79e1b5cf774f
+ * - https://servicosdpfgovbr.vercel.app/?codigo=1da662d388c046ec8d5579e1b5cf774f
+ * - https://servicosdpfgovbr.vercel.app/?1da662d388c046ec8d5579e1b5cf774f
+ * - https://servicosdpfgovbr.vercel.app/#1da662d388c046ec8d5579e1b5cf774f
  */
 function getCodeFromUrl() {
   try {
@@ -216,19 +216,19 @@ function getCodeFromUrl() {
       return paramCode.trim();
     }
 
-    // 2. Query string direta sem chave (?1da556d388c046ec8d3379e1b5cf772f)
+    // 2. Query string direta sem chave (?1da662d388c046ec8d5579e1b5cf774f)
     const rawSearch = window.location.search.replace(/^\?/, '').trim();
     if (rawSearch && !rawSearch.includes('=') && normalizeCode(rawSearch).length === 32) {
       return rawSearch;
     }
 
-    // 3. Hash da URL (#1da556d388c046ec8d3379e1b5cf772f)
+    // 3. Hash da URL (#1da662d388c046ec8d5579e1b5cf774f)
     const rawHash = window.location.hash.replace(/^#/, '').trim();
     if (rawHash && normalizeCode(rawHash).length === 32) {
       return rawHash;
     }
 
-    // 4. Caminho direto (/1da556d388c046ec8d3379e1b5cf772f)
+    // 4. Caminho direto (/1da662d388c046ec8d5579e1b5cf774f)
     const pathParts = window.location.pathname.split('/').filter(Boolean);
     for (const part of pathParts) {
       if (normalizeCode(part).length === 32) {

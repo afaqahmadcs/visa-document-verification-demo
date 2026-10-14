@@ -39,11 +39,11 @@ function formatUuidMask(value) {
 }
 
 console.log('\nTesting UUID mask formatting:');
-const testRaw = '1da556d388c046ec8d3379e1b5cf772f';
+const testRaw = '1da662d388c046ec8d5579e1b5cf774f';
 const masked = formatUuidMask(testRaw);
 console.log('  Raw:   ', testRaw);
 console.log('  Masked:', masked);
-if (masked !== '1da556d3-88c0-46ec-8d33-79e1b5cf772f') {
+if (masked !== '1da662d3-88c0-46ec-8d55-79e1b5cf774f') {
   console.error('✗ Mask formatting failed');
   process.exit(1);
 }
@@ -59,10 +59,10 @@ if (!records || records.length === 0) {
   process.exit(1);
 }
 
-const clientRecord = records.find(r => r.codigo === '1da556d388c046ec8d3379e1b5cf772f');
+const clientRecord = records.find(r => r.codigo === '1da662d388c046ec8d5579e1b5cf774f');
 
 if (!clientRecord) {
-  console.error('✗ Record for SHARIFULLAH HAMDARD (1da556d388c046ec8d3379e1b5cf772f) is missing');
+  console.error('✗ Record for SHARIFULLAH HAMDARD (1da662d388c046ec8d5579e1b5cf774f) is missing');
   process.exit(1);
 }
 
