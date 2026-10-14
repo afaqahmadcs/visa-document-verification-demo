@@ -287,7 +287,7 @@ html, body {
 
 .result-card {
   width: 100%;
-  max-width: 320px;
+  max-width: 284px;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -295,10 +295,10 @@ html, body {
 
 /* "Documento autêntico" Centralizado */
 .result-heading {
-  font-size: 21px;
-  font-weight: 600;
-  color: #656565;
-  margin-bottom: 18px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #3a3a3a;
+  margin-bottom: 20px;
   text-align: center;
   letter-spacing: -0.01em;
   width: 100%;
@@ -306,10 +306,10 @@ html, body {
 
 /* "Dados do documento" Alinhado à Esquerda */
 .result-section-heading {
-  font-size: 16px;
+  font-size: 16.5px;
   font-weight: 700;
-  color: #656565;
-  margin-bottom: 15px;
+  color: #3a3a3a;
+  margin-bottom: 16px;
   text-align: left;
 }
 
@@ -321,24 +321,24 @@ html, body {
 }
 
 .data-field {
-  margin-bottom: 14px;
+  margin-bottom: 15px;
   text-align: left;
 }
 
 /* Rótulos em Negrito & Valores com Peso Normal */
 .field-label {
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 700;
-  color: #656565;
+  color: #3a3a3a;
   line-height: 1.35;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
   text-align: left;
 }
 
 .field-value {
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 400;
-  color: #656565;
+  color: #484848;
   line-height: 1.35;
   text-align: left;
   word-break: break-all;
