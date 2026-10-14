@@ -228,12 +228,12 @@ html, body {
 }
 
 .btn-primary {
-  background-color: #4d8ee8;
+  background-color: #2b70c9;
   color: #ffffff;
 }
 
 .btn-primary:hover {
-  background-color: #387bd5;
+  background-color: #235fae;
 }
 
 .btn-secondary {
@@ -287,7 +287,7 @@ html, body {
 
 .result-card {
   width: 100%;
-  max-width: 284px;
+  max-width: 304px;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
