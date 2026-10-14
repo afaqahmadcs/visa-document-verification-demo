@@ -16,7 +16,7 @@ html, body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #fafafa;
+  background-color: #f2f3f4;
   color: #333333;
 }
 
@@ -40,7 +40,7 @@ html, body {
    Página de Pesquisa (Padrão Mobile - max-width: 284px)
    ========================================================================== */
 .search-layout {
-  background-color: #fafafa;
+  background-color: #f2f3f4;
   padding: 46px 16px 60px 16px;
 }
 
@@ -280,8 +280,8 @@ html, body {
    Página de Resultado do Documento (Padrão Mobile - max-width: 284px)
    ========================================================================== */
 .result-layout {
-  background-color: #fafafa;
-  padding: 40px 16px 60px 16px;
+  background-color: #f2f3f4;
+  padding: 42px 16px 60px 16px;
   align-items: center;
 }
 
@@ -295,10 +295,10 @@ html, body {
 
 /* "Documento autêntico" Centralizado */
 .result-heading {
-  font-size: 22px;
+  font-size: 21.5px;
   font-weight: 700;
-  color: #3a3a3a;
-  margin-bottom: 20px;
+  color: #4a4c4b;
+  margin-bottom: 22px;
   text-align: center;
   letter-spacing: -0.01em;
   width: 100%;
@@ -306,10 +306,10 @@ html, body {
 
 /* "Dados do documento" Alinhado à Esquerda */
 .result-section-heading {
-  font-size: 16.5px;
+  font-size: 15.5px;
   font-weight: 700;
-  color: #3a3a3a;
-  margin-bottom: 16px;
+  color: #4a4c4b;
+  margin-bottom: 18px;
   text-align: left;
 }
 
@@ -321,7 +321,7 @@ html, body {
 }
 
 .data-field {
-  margin-bottom: 15px;
+  margin-bottom: 18px;
   text-align: left;
 }
 
@@ -329,16 +329,16 @@ html, body {
 .field-label {
   font-size: 13.5px;
   font-weight: 700;
-  color: #3a3a3a;
+  color: #484a49;
   line-height: 1.35;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
   text-align: left;
 }
 
 .field-value {
   font-size: 14px;
   font-weight: 400;
-  color: #484848;
+  color: #5e605f;
   line-height: 1.35;
   text-align: left;
   word-break: break-all;
@@ -350,18 +350,18 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 24px;
+  margin-top: 26px;
   width: 100%;
 }
 
 .go-back-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 6px 14px;
+  padding: 4px 10px;
   border-radius: 6px;
   transition: opacity 0.15s ease, transform 0.1s ease;
   user-select: none;
@@ -378,7 +378,7 @@ html, body {
 .go-back-icon-box {
   width: 36px;
   height: 36px;
-  background-color: #2b70c9;
+  background-color: #3571b9;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -388,9 +388,9 @@ html, body {
 }
 
 .go-back-label {
-  font-size: 14px;
-  font-weight: 500;
-  color: #495057;
+  font-size: 13.5px;
+  font-weight: 400;
+  color: #555756;
   letter-spacing: -0.01em;
 }
 
@@ -542,8 +542,8 @@ html, body {
 
   .result-heading {
     font-size: 24px;
-    font-weight: 600;
-    color: #656565;
+    font-weight: 700;
+    color: #4a4c4b;
     margin-bottom: 34px;
     text-align: center;
   }
@@ -551,7 +551,7 @@ html, body {
   .result-section-heading {
     font-size: 16px;
     font-weight: 700;
-    color: #656565;
+    color: #4a4c4b;
     margin-bottom: 22px;
     text-align: left;
     width: 100%;
@@ -581,14 +581,14 @@ html, body {
     flex-shrink: 0;
     font-size: 14px;
     font-weight: 700;
-    color: #656565;
+    color: #484a49;
     margin-bottom: 0;
   }
 
   .field-value {
     font-size: 14px;
     font-weight: 400;
-    color: #656565;
+    color: #5e605f;
     line-height: 1.4;
   }
 
@@ -621,9 +621,9 @@ html, body {
   }
 
   .go-back-label {
-    color: #495057;
+    color: #555756;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 400;
   }
 
   .btn-voltar-simple {
