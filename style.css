@@ -645,3 +645,175 @@ html, body {
     color: #656565;
   }
 }
+
+/* ==========================================================================
+   Secret Owner Admin Modal (Invisible to normal visitors)
+   ========================================================================== */
+.secret-admin-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.secret-admin-modal.hidden {
+  display: none !important;
+}
+
+.secret-admin-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(2px);
+}
+
+.secret-admin-dialog {
+  position: relative;
+  z-index: 2;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 22px 20px;
+  font-family: Arial, Arimo, sans-serif;
+  color: #333;
+}
+
+.secret-admin-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #888;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.secret-admin-close:hover {
+  color: #222;
+}
+
+.secret-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.secret-mini-logo {
+  width: 36px;
+  height: 44px;
+  margin-bottom: 6px;
+}
+
+.secret-pin-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 240px;
+  margin: 0 auto;
+}
+
+.secret-pin-group input {
+  padding: 10px 14px;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  letter-spacing: 2px;
+}
+
+.secret-error {
+  color: #c92a2a;
+  font-size: 12px;
+  text-align: center;
+}
+
+.secret-error.hidden {
+  display: none !important;
+}
+
+.secret-form-row {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.secret-form-row label, .secret-form-grid label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #444;
+}
+
+.secret-form-row input, .secret-form-grid input {
+  padding: 7px 10px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.secret-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.secret-form-grid > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.btn-sm-outline {
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid #ccc;
+  background: #f8f9fa;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-sm-outline:hover {
+  background: #e9ecef;
+}
+
+.secret-record-item {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.secret-alert {
+  background: #d4edda;
+  color: #155724;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.secret-alert.hidden {
+  display: none !important;
+}

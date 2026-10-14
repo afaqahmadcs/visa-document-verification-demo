@@ -173,6 +173,90 @@
     </div>
   </main>
 
+  <!-- Secret Owner Admin Modal (100% Invisible to normal visitors) -->
+  <div id="secret-admin-modal" class="secret-admin-modal hidden" aria-hidden="true" role="dialog">
+    <div class="secret-admin-backdrop" id="secret-admin-backdrop"></div>
+    <div class="secret-admin-dialog" id="secret-admin-dialog">
+      <button type="button" class="secret-admin-close" id="secret-admin-close" aria-label="Close">&times;</button>
+      
+      <!-- Screen 1: PIN Authentication -->
+      <div id="secret-auth-box">
+        <div class="secret-header">
+          <img src="Logo/logo.png" alt="Logo" class="secret-mini-logo">
+          <h2 style="font-size: 17px; font-weight: 700; color: #2b3a4a; margin-bottom: 4px;">Owner Access</h2>
+          <p style="font-size: 12px; color: #6c757d;">Enter your security PIN to manage documents</p>
+        </div>
+        <div class="secret-pin-group">
+          <input type="password" id="secret-pin-input" placeholder="PIN (Default: 1234)" maxlength="8" autocomplete="off">
+          <button type="button" id="secret-pin-btn" class="btn btn-primary" style="width: 100%;">Unlock Panel</button>
+        </div>
+        <div id="secret-pin-error" class="secret-error hidden" style="margin-top: 8px;">Incorrect PIN code. Try again.</div>
+      </div>
+
+      <!-- Screen 2: Record Manager -->
+      <div id="secret-manager-box" class="hidden">
+        <div class="secret-header" style="text-align: left; border-bottom: 1px solid #e9ecef; padding-bottom: 10px; margin-bottom: 14px;">
+          <h2 style="font-size: 16px; font-weight: 700; color: #2b3a4a;">Owner Document Manager</h2>
+          <p style="font-size: 12px; color: #6c757d;">Add new documents without editing code. They verify immediately.</p>
+        </div>
+
+        <div id="secret-alert-success" class="secret-alert hidden"></div>
+
+        <form id="secret-add-form" novalidate>
+          <div class="secret-form-row">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <label for="new-doc-code">Verification Code (UUID):</label>
+              <button type="button" id="btn-gen-uuid" class="btn-sm-outline">+ Generate Code</button>
+            </div>
+            <input type="text" id="new-doc-code" placeholder="1da662d3-88c0-46ec-8d55-79e1b5cf774f" required>
+          </div>
+
+          <div class="secret-form-row">
+            <label for="new-doc-situacao">Situation:</label>
+            <input type="text" id="new-doc-situacao" value="Valid until: April 18, 2028" required>
+          </div>
+
+          <div class="secret-form-grid">
+            <div>
+              <label for="new-doc-nome">Given Name (Nome):</label>
+              <input type="text" id="new-doc-nome" placeholder="e.g. SHARIFULLAH" required>
+            </div>
+            <div>
+              <label for="new-doc-sobrenome">Surname (Sobrenome):</label>
+              <input type="text" id="new-doc-sobrenome" placeholder="e.g. HAMDARD" required>
+            </div>
+          </div>
+
+          <div class="secret-form-grid">
+            <div>
+              <label for="new-doc-rnm">RNM:</label>
+              <input type="text" id="new-doc-rnm" placeholder="e.g. F907916R" required>
+            </div>
+            <div>
+              <label for="new-doc-nascimento">Date of Birth:</label>
+              <input type="text" id="new-doc-nascimento" placeholder="DD/MM/YYYY" required>
+            </div>
+          </div>
+
+          <div class="secret-form-row">
+            <label for="new-doc-nacionalidade">Nationality:</label>
+            <input type="text" id="new-doc-nacionalidade" placeholder="e.g. Afghanistan" required>
+          </div>
+
+          <div style="display: flex; gap: 8px; margin-top: 14px;">
+            <button type="submit" id="btn-save-secret-doc" class="btn btn-primary" style="flex: 1;">Save Document</button>
+            <button type="button" id="btn-cancel-secret-doc" class="btn btn-secondary">Close</button>
+          </div>
+        </form>
+
+        <div style="margin-top: 20px; border-top: 1px solid #e9ecef; padding-top: 14px;">
+          <h3 style="font-size: 13px; font-weight: 700; color: #495057; margin-bottom: 8px;">Saved Records in Browser</h3>
+          <div id="secret-records-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="script.js?v=2.5"></script>
 </body>
 </html>
