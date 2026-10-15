@@ -68,9 +68,9 @@ html, body {
 }
 
 .portal-logo {
-  width: 58px;
-  height: 68px;
-  max-height: 68px;
+  width: 72px;
+  height: 86px;
+  max-height: 86px;
   object-fit: contain;
   display: block;
   background-color: transparent !important;
@@ -277,45 +277,46 @@ html, body {
 }
 
 /* ==========================================================================
-   Página de Resultado do Documento (Padrão Mobile - max-width: 284px)
+   Página de Resultado do Documento (Fiel à Imagem de Referência)
    ========================================================================== */
 .result-layout {
   background-color: #f2f3f4;
-  padding: 42px 16px 60px 16px;
+  padding: 38px 24px 60px 24px;
   align-items: center;
 }
 
 .result-card {
   width: 100%;
-  max-width: 284px;
+  max-width: 360px;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   font-family: Arial, Arimo, "Helvetica Neue", Helvetica, sans-serif;
 }
 
-/* "Documento autêntico" Centralizado */
+/* "Authentic document" Centralizado */
 .result-heading {
   font-family: Arial, Arimo, "Helvetica Neue", Helvetica, sans-serif;
   font-size: 22px;
   font-weight: 800;
   color: #383a39;
   line-height: 1.15;
-  margin-bottom: 9px;
+  margin-bottom: 14px;
   text-align: center;
   letter-spacing: -0.01em;
   width: 100%;
 }
 
-/* "Dados do documento" Alinhado à Esquerda */
+/* "Document data" Alinhado à Esquerda */
 .result-section-heading {
   font-family: Arial, Arimo, "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 15.5px;
+  font-size: 16px;
   font-weight: 700;
   color: #383a39;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
   text-align: left;
-  padding-left: 20px;
+  padding-left: 0;
+  width: 100%;
 }
 
 /* Lista de Dados do Documento */
@@ -323,21 +324,21 @@ html, body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-left: 20px;
+  padding-left: 0;
   box-sizing: border-box;
 }
 
 .data-field {
-  margin-bottom: 18px;
+  margin-bottom: 16px;
   text-align: left;
 }
 
 /* Rótulos em Negrito & Valores com Peso Normal */
 .field-label {
   font-family: Arial, Arimo, "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 700;
-  color: #383a39;
+  color: #484a49;
   line-height: 1.35;
   margin-bottom: 2px;
   text-align: left;
@@ -348,7 +349,7 @@ html, body {
   font-size: 14px;
   font-weight: 400;
   color: #555756;
-  line-height: 1.35;
+  line-height: 1.4;
   text-align: left;
   word-break: break-all;
   overflow-wrap: anywhere;
@@ -359,14 +360,14 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 26px;
+  margin-top: 32px;
   width: 100%;
 }
 
 .go-back-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -385,19 +386,19 @@ html, body {
 }
 
 .go-back-icon-box {
-  width: 36px;
-  height: 36px;
-  background-color: #3571b9;
-  border-radius: 8px;
+  width: 38px;
+  height: 38px;
+  background-color: #0487F9;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
   flex-shrink: 0;
 }
 
 .go-back-label {
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 400;
   color: #555756;
   letter-spacing: -0.01em;
@@ -461,9 +462,9 @@ html, body {
   }
 
   .portal-logo {
-    width: 58px;
-    height: 68px;
-    max-height: 68px;
+    width: 84px;
+    height: 100px;
+    max-height: 100px;
   }
 
   /* Título em uma única linha no PC */
