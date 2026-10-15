@@ -68,9 +68,9 @@ html, body {
 }
 
 .portal-logo {
-  width: 72px;
-  height: 86px;
-  max-height: 86px;
+  width: 90px;
+  height: 106px;
+  max-height: 106px;
   object-fit: contain;
   display: block;
   background-color: transparent !important;
@@ -462,9 +462,9 @@ html, body {
   }
 
   .portal-logo {
-    width: 84px;
-    height: 100px;
-    max-height: 100px;
+    width: 105px;
+    height: 124px;
+    max-height: 124px;
   }
 
   /* Título em uma única linha no PC */
